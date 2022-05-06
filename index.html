@@ -13,36 +13,39 @@
     <nav class="topnav">
       <a class="active" id="welcome_a">Welcome</a>
       <a id="settings_a">Settings</a>
-      <a id="game_a">Play Packman!</a>
+      <a id="top10_a">Top 10!</a>
+      <a id="game_a">Let's Pack Man!</a>
       <a id="about_a">About</a>
     </nav>
 
     <!-- Content-->
     <div id="content">
-      <div class="hide" id="game_div">
-        <div id="score">
-          <label for="lblScore">SCORE:</label>
-          <input id="lblScore" type="text" />
-        </div>
-        <div id="time">
-          <label for="lblTime">TIME:</label>
-          <input id="lblTime" type="text" />
-        </div>
-
-        <canvas id="canvas" height="600" width="600"></canvas>
-      </div>
-
       <div id="welcome_div">
-        <img src="/resources/welcome.png" alt="Logo!" style="height:150px;" /><br />
-        <button
-          id="signup-btn"
-          class="btn-welcome-up"
-          role="button"
-        > <!-- onclick="moveSignUp()" -->
+        <img
+          src="/resources/welcome.png"
+          alt="Logo!"
+          style="height: 150px"
+        /><br />
+        <button id="signup-btn" class="btn-welcome-up" role="button">
+          <!-- onclick="moveSignUp()" -->
           Sign Up
         </button>
-        <button id="login-btn" class="btn-welcome-in"> <!--onclick="moveSignIn()" -->
+        <button id="login-btn" class="btn-welcome-in">
+          <!--onclick="moveSignIn()" -->
           Login
+        </button>
+      </div>
+
+      <div id="welcome_div-logged-in" class="hide">
+        <img
+          src="/resources/welcome.png"
+          alt="Logo!"
+          style="height: 150px"
+        /><br />
+        <h1 id="logged_in_welcome">Welcome</h1>
+        <button id="logout-btn" class="btn-welcome-in">
+          <!--onclick="moveSignIn()" -->
+          Logout
         </button>
       </div>
 
@@ -121,14 +124,14 @@
               placeholder="Your Date of Birth.."
             /><br /><br />
 
-            <input type="submit" value="Submit" id="btn_submit" />
+            <input type="submit" value="Sign-Up" id="btn_submit" />
           </form>
         </div>
       </div>
 
       <div class="hide" id="login_div">
         <div class="container">
-          <form>
+          <form onsubmit="StartGame()">
             <!-- action="action_page.php" -->
             <label for="form_login_username">User Name</label>
             <input
@@ -156,12 +159,33 @@
 
             <input type="submit" value="Login" id="checkLogin-btn" />
           </form>
+        </div>
 
+        <div class="hide" id="settings_div"></div>
+
+        <div class="hide" id="top10_div">
+          <h1>Top 10 Games Played:</h1>
+        </div>
+
+        <div class="hide" id="about_div"></div>
+
+        <div class="hide" id="game_div_before_login">
+          <h2>Please Login first!</h2>
+        </div>
+
+        <div class="hide" id="game_div">
+          <h1>Hello</h1>
+          <div id="score">
+          <label for="lblScore">SCORE:</label>
+          <input id="lblScore" type="text" />
+        </div>
+        <div id="time">
+          <label for="lblTime">TIME:</label>
+          <input id="lblTime" type="text" /> -->
+
+          <canvas id="canvas" height="600" width="600"></canvas>
+        </div>
       </div>
-
-      <div class="hide" id="settings_div"></div>
-
-      <div class="hide" id="about_div"></div>
     </div>
 
     <footer>

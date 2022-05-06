@@ -1,9 +1,11 @@
 /* Page Variables */
 var currPage = "welcome";
+var currUser = null;
 
 // anchors nav bar
 const anchor_welcome = document.getElementById("welcome_a");
 const anchor_settings = document.getElementById("settings_a");
+const anchor_top10 = document.getElementById("top10_a");
 const anchor_game = document.getElementById("game_a");
 const anchor_about = document.getElementById("about_a");
 
@@ -14,6 +16,7 @@ const div_signUp = document.getElementById("signup_div");
 const div_login = document.getElementById("login_div");
 const div_settings = document.getElementById("settings_div");
 const div_about = document.getElementById("about_div");
+const div_top10 = document.getElementById("top10_div");
 
 // btn
 const btn_signUp = document.getElementById("signup-btn");
@@ -31,49 +34,75 @@ var time_elapsed;
 var interval;
 
 /* ////////////////////////////////  NAV PAGES ////////////////////////////////// */
+
+function changePage(
+  from_page,
+  to_page,
+  have_anchor_from,
+  have_anchor_to,
+  caseName
+) {
+  from_page.classList.toggle("hide");
+  to_page.classList.toggle("hide");
+
+  if (have_anchor_from) {
+    have_anchor_from.classList.toggle("active");
+  }
+  if (have_anchor_to) {
+    have_anchor_to.classList.toggle("active");
+  }
+
+  currPage = caseName;
+}
+
 anchor_welcome.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
       console.log("in welcome!");
       break;
     case "settings":
+      changePage(
+        div_settings,
+        div_welcome,
+        anchor_settings,
+        anchor_welcome,
+        "welcome"
+      );
       console.log("in welcome!");
-      div_settings.classList.toggle("hide");
-      div_welcome.classList.toggle("hide");
-
-      anchor_settings.classList.toggle("active");
-      anchor_welcome.classList.toggle("active");
-      currPage = "welcome";
       break;
     case "game":
+      changePage(div_game, div_welcome, anchor_game, anchor_welcome, "welcome");
       console.log("in welcome!");
-      div_game.classList.toggle("hide");
-      div_welcome.classList.toggle("hide");
-
-      anchor_game.classList.toggle("active");
-      anchor_welcome.classList.toggle("active");
-      currPage = "welcome";
       break;
     case "about":
       console.log("in welcome!");
-      div_about.classList.toggle("hide");
-      div_welcome.classList.toggle("hide");
-
-      anchor_about.classList.toggle("active");
-      anchor_welcome.classList.toggle("active");
-      currPage = "welcome";
+      changePage(
+        div_about,
+        div_welcome,
+        anchor_about,
+        anchor_welcome,
+        "welcome"
+      );
       break;
     case "signUp":
       console.log("in welcome!");
-      div_signUp.classList.toggle("hide");
-      div_welcome.classList.toggle("hide");
-      currPage = "welcome";
+      changePage(div_signUp, div_welcome, false, false, "welcome");
+
       break;
     case "login":
       console.log("in welcome!");
-      div_login.classList.toggle("hide");
-      div_welcome.classList.toggle("hide");
-      currPage = "welcome";
+      changePage(div_login, div_welcome, false, false, "welcome");
+      break;
+
+    case "top10":
+      console.log("in welcome!");
+      changePage(
+        div_top10,
+        div_welcome,
+        anchor_top10,
+        anchor_welcome,
+        "welcome"
+      );
       break;
   }
 });
@@ -81,138 +110,170 @@ anchor_settings.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
       console.log("in settings!");
-      div_welcome.classList.toggle("hide");
-      div_settings.classList.toggle("hide");
-
-      anchor_welcome.classList.toggle("active");
-      anchor_settings.classList.toggle("active");
-      currPage = "settings";
+      changePage(
+        div_welcome,
+        div_settings,
+        anchor_welcome,
+        anchor_settings,
+        "settings"
+      );
       break;
     case "settings":
       console.log("still in settings!");
       break;
     case "game":
-      console.log("in settings!");
-      div_game.classList.toggle("hide");
-      div_settings.classList.toggle("hide");
-
-      anchor_game.classList.toggle("active");
-      anchor_settings.classList.toggle("active");
-      currPage = "settings";
+      changePage(
+        div_game,
+        div_settings,
+        anchor_game,
+        anchor_settings,
+        "settings"
+      );
       break;
     case "about":
       console.log("in settings!");
-      div_about.classList.toggle("hide");
-      div_settings.classList.toggle("hide");
-
-      anchor_about.classList.toggle("active");
-      anchor_settings.classList.toggle("active");
-      currPage = "settings";
+      changePage(
+        div_about,
+        div_settings,
+        anchor_about,
+        anchor_settings,
+        "settings"
+      );
       break;
     case "signUp":
       console.log("in settings!");
-      div_signUp.classList.toggle("hide");
-      div_settings.classList.toggle("hide");
-      currPage = "settings";
+      changePage(
+        div_signUp,
+        div_settings,
+        anchor_welcome,
+        anchor_settings,
+        "settings"
+      );
       break;
     case "login":
       console.log("in settings!");
-      div_login.classList.toggle("hide");
-      div_settings.classList.toggle("hide");
-      currPage = "settings";
+      changePage(
+        div_login,
+        div_settings,
+        anchor_welcome,
+        anchor_settings,
+        "settings"
+      );
+      break;
+    case "top10":
+      console.log("in settings!");
+      changePage(
+        div_top10,
+        div_settings,
+        anchor_top10,
+        anchor_settings,
+        "settings"
+      );
       break;
   }
 });
+anchor_top10.addEventListener("click", function () {
+  switch (currPage) {
+    case "welcome":
+      console.log("in top10!");
+      changePage(div_welcome, div_top10, anchor_welcome, anchor_top10, "top10");
+      break;
+    case "settings":
+      console.log("in top10!");
+      changePage(
+        div_settings,
+        div_top10,
+        anchor_settings,
+        anchor_top10,
+        "top10"
+      );
+      break;
+    case "game":
+      changePage(div_game, div_top10, anchor_game, anchor_top10, "top10");
+      break;
+    case "about":
+      console.log("in top10!");
+      changePage(div_about, div_top10, anchor_about, anchor_top10, "top10");
+      break;
+    case "signUp":
+      console.log("in top10!");
+      changePage(div_signUp, div_top10, anchor_welcome, anchor_top10, "top10");
+      break;
+    case "login":
+      console.log("in top10!");
+      changePage(div_login, div_top10, anchor_welcome, anchor_top10, "top10");
+      break;
+    case "top10":
+      console.log("still in top10!");
+      break;
+  }
+});
+
 anchor_game.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
       console.log("in game!");
-      div_welcome.classList.toggle("hide");
-      div_game.classList.toggle("hide");
-
-      anchor_game.classList.toggle("active");
-      anchor_welcome.classList.toggle("active");
-      currPage = "game";
+      changePage(div_welcome, div_game, anchor_welcome, anchor_game, "game");
       break;
     case "settings":
       console.log("in game!");
-      div_settings.classList.toggle("hide");
-      div_game.classList.toggle("hide");
-
-      anchor_settings.classList.toggle("active");
-      anchor_game.classList.toggle("active");
-      currPage = "game";
+      changePage(div_settings, div_game, anchor_settings, anchor_game, "game");
       break;
     case "game":
-      console.log("still in game!");
-
+      console.log("in game!");
       break;
     case "about":
-      console.log("in settings!");
-      div_about.classList.toggle("hide");
-      div_game.classList.toggle("hide");
-
-      anchor_about.classList.toggle("active");
-      anchor_game.classList.toggle("active");
-      currPage = "game";
+      changePage(div_about, div_game, anchor_about, anchor_game, "game");
       break;
     case "signUp":
-      console.log("in settings!");
-      div_signUp.classList.toggle("hide");
-      div_game.classList.toggle("hide");
-      currPage = "game";
+      console.log("in game!");
+      changePage(div_signUp, div_game, anchor_welcome, anchor_game, "game");
       break;
     case "login":
-      console.log("in settings!");
-      div_login.classList.toggle("hide");
-      div_game.classList.toggle("hide");
-      currPage = "game";
+      console.log("in game!");
+      changePage(div_login, div_game, anchor_welcome, anchor_game, "game");
+      break;
+    case "top10":
+      console.log("in game!");
+      changePage(div_top10, div_game, anchor_top10, anchor_game, "game");
       break;
   }
 });
+
 anchor_about.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
       console.log("in about!");
-      div_welcome.classList.toggle("hide");
-      div_about.classList.toggle("hide");
-
-      anchor_welcome.classList.toggle("active");
-      anchor_about.classList.toggle("active");
-      currPage = "about";
+      changePage(div_welcome, div_about, anchor_welcome, anchor_about, "about");
       break;
     case "settings":
       console.log("in about!");
-      div_settings.classList.toggle("hide");
-      div_about.classList.toggle("hide");
-
-      anchor_settings.classList.toggle("active");
-      anchor_about.classList.toggle("active");
-      currPage = "about";
+      changePage(
+        div_settings,
+        div_about,
+        anchor_settings,
+        anchor_about,
+        "about"
+      );
       break;
     case "game":
       console.log("in about!");
-      div_game.classList.toggle("hide");
-      div_about.classList.toggle("hide");
-
-      anchor_game.classList.toggle("active");
-      anchor_about.classList.toggle("active");
-      currPage = "about";
+      changePage(div_game, div_about, anchor_game, anchor_about, "about");
       break;
     case "about":
       console.log("still in about!");
       break;
     case "signUp":
       console.log("in about!");
-      div_signUp.classList.toggle("hide");
-      div_about.classList.toggle("hide");
-      currPage = "about";
+      changePage(div_signUp, div_about, anchor_welcome, anchor_about, "about");
       break;
     case "login":
       console.log("in about!");
-      div_login.classList.toggle("hide");
-      div_about.classList.toggle("hide");
-      currPage = "about";
+      changePage(div_login, div_about, anchor_welcome, anchor_about, "about");
+      break;
+    case "top10":
+      console.log("in about!");
+      changePage(div_top10, div_about, anchor_top10, anchor_about, "about");
       break;
   }
 });
@@ -360,6 +421,7 @@ $(document).ready(function () {
       emailError == true &&
       nameError == true
     ) {
+      // register new user <<---
       return true;
     } else {
       return false;
@@ -369,7 +431,7 @@ $(document).ready(function () {
 
 // /* ////////////////////////////////  LOGIN ////////////////////////////////// */
 btn_login.addEventListener("click", function () {
-  console.log("in sign up!");
+  console.log("in sign in!");
   div_welcome.classList.toggle("hide");
   div_login.classList.toggle("hide");
   currPage = "login";
@@ -391,10 +453,12 @@ $(document).ready(function () {
       usernameError = false;
       return false;
     } else if (
-      usernameValue.length == 0 ||
-      !/\d+/.test(usernameValue) ||
-      !/[a-zA-Z]+/.test(usernameValue)
+      false
+      //   usernameValue.length == 0 ||
+      //   !/\d+/.test(usernameValue) ||
+      //   !/[a-zA-Z]+/.test(usernameValue)
     ) {
+      console.log("here error");
       $("#form_login_usernamecheck").show();
       $("#form_login_usernamecheck").html(
         "**username must be not empty and includes characters and numbers!"
@@ -418,7 +482,7 @@ $(document).ready(function () {
       $("#form_login_passcheck").show();
       passwordError = false;
       return false;
-    } else if (![].includes(passwordValue)) {
+    } else if (false) {
       // change the way it validate password (with the data array)
       passwordError = false;
       return false;
@@ -428,179 +492,199 @@ $(document).ready(function () {
   }
 
   // Submit button
-  $("#checkLogin-btn").click(function () {
+  $("#checkLogin-btn").click(function (e) {
+    e.preventDefault();
     validateUsernameLogin();
     validatePasswordLogin();
+
     if (usernameError == true && passwordError == true) {
-      return true;
-    } else {
+      currUser = "k";
       return false;
     }
   });
 });
 
+document
+  .getElementById("checkLogin-btn")
+  .addEventListener("click", function (e) {
+    div_welcome = document.getElementById("welcome_div-logged-in");
+    div_login.classList.toggle("hide");
+    div_welcome.classList.toggle("hide");
+  });
+
+function StartGame() {
+  if (!currUser) {
+    return;
+  }
+  currPage = "game";
+  //   anchor_game.classList.toggle("active");
+  //   anchor_game.classList.toggle("hide");
+
+  //   div_login.classList.toggle("hide");
+  //   div_game.classList.toggle("hide");
+}
+
 /* //////////////////////////////// GAME ////////////////////////////////// */
 
-// $(document).ready(function() {
-// 	context = canvas.getContext("2d");
-// 	Start();
-// });
+$(document).ready(function () {
+  context = canvas.getContext("2d");
+});
 
-// function Start() {
-// 	board = new Array();
-// 	score = 0;
-// 	pac_color = "yellow";
-// 	var cnt = 100;
-// 	var food_remain = 50;
-// 	var pacman_remain = 1;
-// 	start_time = new Date();
-// 	for (var i = 0; i < 10; i++) {
-// 		board[i] = new Array();
-// 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-// 		for (var j = 0; j < 10; j++) {
-// 			if (
-// 				(i == 3 && j == 3) ||
-// 				(i == 3 && j == 4) ||
-// 				(i == 3 && j == 5) ||
-// 				(i == 6 && j == 1) ||
-// 				(i == 6 && j == 2)
-// 			) {
-// 				board[i][j] = 4;
-// 			} else {
-// 				var randomNum = Math.random();
-// 				if (randomNum <= (1.0 * food_remain) / cnt) {
-// 					food_remain--;
-// 					board[i][j] = 1;
-// 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-// 					shape.i = i;
-// 					shape.j = j;
-// 					pacman_remain--;
-// 					board[i][j] = 2;
-// 				} else {
-// 					board[i][j] = 0;
-// 				}
-// 				cnt--;
-// 			}
-// 		}
-// 	}
-// 	while (food_remain > 0) {
-// 		var emptyCell = findRandomEmptyCell(board);
-// 		board[emptyCell[0]][emptyCell[1]] = 1;
-// 		food_remain--;
-// 	}
-// 	keysDown = {};
-// 	addEventListener(
-// 		"keydown",
-// 		function(e) {
-// 			keysDown[e.keyCode] = true;
-// 		},
-// 		false
-// 	);
-// 	addEventListener(
-// 		"keyup",
-// 		function(e) {
-// 			keysDown[e.keyCode] = false;
-// 		},
-// 		false
-// 	);
-// 	interval = setInterval(UpdatePosition, 250);
-// }
+function Start() {
+  board = new Array();
+  score = 0;
+  pac_color = "yellow";
+  var cnt = 100;
+  var food_remain = 50;
+  var pacman_remain = 1;
+  start_time = new Date();
+  for (var i = 0; i < 10; i++) {
+    board[i] = new Array();
+    //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+    for (var j = 0; j < 10; j++) {
+      if (
+        (i == 3 && j == 3) ||
+        (i == 3 && j == 4) ||
+        (i == 3 && j == 5) ||
+        (i == 6 && j == 1) ||
+        (i == 6 && j == 2)
+      ) {
+        board[i][j] = 4;
+      } else {
+        var randomNum = Math.random();
+        if (randomNum <= (1.0 * food_remain) / cnt) {
+          food_remain--;
+          board[i][j] = 1;
+        } else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+          shape.i = i;
+          shape.j = j;
+          pacman_remain--;
+          board[i][j] = 2;
+        } else {
+          board[i][j] = 0;
+        }
+        cnt--;
+      }
+    }
+  }
+  while (food_remain > 0) {
+    var emptyCell = findRandomEmptyCell(board);
+    board[emptyCell[0]][emptyCell[1]] = 1;
+    food_remain--;
+  }
+  keysDown = {};
+  addEventListener(
+    "keydown",
+    function (e) {
+      keysDown[e.keyCode] = true;
+    },
+    false
+  );
+  addEventListener(
+    "keyup",
+    function (e) {
+      keysDown[e.keyCode] = false;
+    },
+    false
+  );
+  interval = setInterval(UpdatePosition, 250);
+}
 
-// function findRandomEmptyCell(board) {
-// 	var i = Math.floor(Math.random() * 9 + 1);
-// 	var j = Math.floor(Math.random() * 9 + 1);
-// 	while (board[i][j] != 0) {
-// 		i = Math.floor(Math.random() * 9 + 1);
-// 		j = Math.floor(Math.random() * 9 + 1);
-// 	}
-// 	return [i, j];
-// }
+function findRandomEmptyCell(board) {
+  var i = Math.floor(Math.random() * 9 + 1);
+  var j = Math.floor(Math.random() * 9 + 1);
+  while (board[i][j] != 0) {
+    i = Math.floor(Math.random() * 9 + 1);
+    j = Math.floor(Math.random() * 9 + 1);
+  }
+  return [i, j];
+}
 
-// function GetKeyPressed() {
-// 	if (keysDown[38]) {
-// 		return 1;
-// 	}
-// 	if (keysDown[40]) {
-// 		return 2;
-// 	}
-// 	if (keysDown[37]) {
-// 		return 3;
-// 	}
-// 	if (keysDown[39]) {
-// 		return 4;
-// 	}
-// }
+function GetKeyPressed() {
+  if (keysDown[38]) {
+    return 1;
+  }
+  if (keysDown[40]) {
+    return 2;
+  }
+  if (keysDown[37]) {
+    return 3;
+  }
+  if (keysDown[39]) {
+    return 4;
+  }
+}
 
-// function Draw() {
-// 	canvas.width = canvas.width; //clean board
-// 	lblScore.value = score;
-// 	lblTime.value = time_elapsed;
-// 	for (var i = 0; i < 10; i++) {
-// 		for (var j = 0; j < 10; j++) {
-// 			var center = new Object();
-// 			center.x = i * 60 + 30;
-// 			center.y = j * 60 + 30;
-// 			if (board[i][j] == 2) {
-// 				context.beginPath();
-// 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-// 				context.lineTo(center.x, center.y);
-// 				context.fillStyle = pac_color; //color
-// 				context.fill();
-// 				context.beginPath();
-// 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-// 				context.fillStyle = "black"; //color
-// 				context.fill();
-// 			} else if (board[i][j] == 1) {
-// 				context.beginPath();
-// 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-// 				context.fillStyle = "black"; //color
-// 				context.fill();
-// 			} else if (board[i][j] == 4) {
-// 				context.beginPath();
-// 				context.rect(center.x - 30, center.y - 30, 60, 60);
-// 				context.fillStyle = "grey"; //color
-// 				context.fill();
-// 			}
-// 		}
-// 	}
-// }
+function Draw() {
+  canvas.width = canvas.width; //clean board
+  lblScore.value = score;
+  lblTime.value = time_elapsed;
+  for (var i = 0; i < 10; i++) {
+    for (var j = 0; j < 10; j++) {
+      var center = new Object();
+      center.x = i * 60 + 30;
+      center.y = j * 60 + 30;
+      if (board[i][j] == 2) {
+        context.beginPath();
+        context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+        context.lineTo(center.x, center.y);
+        context.fillStyle = pac_color; //color
+        context.fill();
+        context.beginPath();
+        context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+        context.fillStyle = "black"; //color
+        context.fill();
+      } else if (board[i][j] == 1) {
+        context.beginPath();
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+        context.fillStyle = "black"; //color
+        context.fill();
+      } else if (board[i][j] == 4) {
+        context.beginPath();
+        context.rect(center.x - 30, center.y - 30, 60, 60);
+        context.fillStyle = "grey"; //color
+        context.fill();
+      }
+    }
+  }
+}
 
-// function UpdatePosition() {
-// 	board[shape.i][shape.j] = 0;
-// 	var x = GetKeyPressed();
-// 	if (x == 1) {
-// 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
-// 			shape.j--;
-// 		}
-// 	}
-// 	if (x == 2) {
-// 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
-// 			shape.j++;
-// 		}
-// 	}
-// 	if (x == 3) {
-// 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
-// 			shape.i--;
-// 		}
-// 	}
-// 	if (x == 4) {
-// 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
-// 			shape.i++;
-// 		}
-// 	}
-// 	if (board[shape.i][shape.j] == 1) {
-// 		score++;
-// 	}
-// 	board[shape.i][shape.j] = 2;
-// 	var currentTime = new Date();
-// 	time_elapsed = (currentTime - start_time) / 1000;
-// 	if (score >= 20 && time_elapsed <= 10) {
-// 		pac_color = "green";
-// 	}
-// 	if (score == 50) {
-// 		window.clearInterval(interval);
-// 		window.alert("Game completed");
-// 	} else {
-// 		Draw();
-// 	}
-// }
+function UpdatePosition() {
+  board[shape.i][shape.j] = 0;
+  var x = GetKeyPressed();
+  if (x == 1) {
+    if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+      shape.j--;
+    }
+  }
+  if (x == 2) {
+    if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+      shape.j++;
+    }
+  }
+  if (x == 3) {
+    if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+      shape.i--;
+    }
+  }
+  if (x == 4) {
+    if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+      shape.i++;
+    }
+  }
+  if (board[shape.i][shape.j] == 1) {
+    score++;
+  }
+  board[shape.i][shape.j] = 2;
+  var currentTime = new Date();
+  time_elapsed = (currentTime - start_time) / 1000;
+  if (score >= 20 && time_elapsed <= 10) {
+    pac_color = "green";
+  }
+  if (score == 50) {
+    window.clearInterval(interval);
+    window.alert("Game completed");
+  } else {
+    Draw();
+  }
+}
