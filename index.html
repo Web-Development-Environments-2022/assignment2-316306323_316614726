@@ -33,16 +33,15 @@
       </div>
 
       <div id="welcome_div">
-        <img src="/resources/Logo.png" alt="Logo!" /><br />
+        <img src="/resources/welcome.png" alt="Logo!" style="height:150px;" /><br />
         <button
           id="signup-btn"
           class="btn-welcome-up"
           role="button"
-          onclick="moveSignUp()"
-        >
+        > <!-- onclick="moveSignUp()" -->
           Sign Up
         </button>
-        <button id="login-btn" class="btn-welcome-in" onclick="moveSignIn()">
+        <button id="login-btn" class="btn-welcome-in"> <!--onclick="moveSignIn()" -->
           Login
         </button>
       </div>
@@ -127,7 +126,38 @@
         </div>
       </div>
 
-      <div class="hide" id="login_div"></div>
+      <div class="hide" id="login_div">
+        <div class="container">
+          <form>
+            <!-- action="action_page.php" -->
+            <label for="form_login_username">User Name</label>
+            <input
+              type="text"
+              id="form_login_username"
+              name="form_login_username"
+              placeholder="Your username.."
+            />
+            <h5 id="form_login_usernamecheck" style="color: red">
+              **Username must not be empty!
+            </h5>
+            <br /><br />
+
+            <label for="form_login_pass">Password</label><br />
+            <input
+              type="password"
+              id="form_login_pass"
+              name="form_login_pass"
+              placeholder="Your password.."
+            />
+            <h5 id="form_login_passcheck" style="color: red">
+              **Please Fill the password
+            </h5>
+            <br /><br />
+
+            <input type="submit" value="Login" id="checkLogin-btn" />
+          </form>
+
+      </div>
 
       <div class="hide" id="settings_div"></div>
 

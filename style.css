@@ -58,10 +58,9 @@ header h1 {
   text-align: center;
 }
 
-#welcome img {
-  height: 400px;
-  width: 500px;
-}
+/* #welcome img {
+  height: 100px;
+} */
 
 /* CSS */
 .btn-welcome-up {

@@ -18,6 +18,7 @@ const div_about = document.getElementById("about_div");
 // btn
 const btn_signUp = document.getElementById("signup-btn");
 const btn_login = document.getElementById("login-btn");
+const btn_checkLogin = document.getElementById("checkLogin-btn");
 
 /* Game Variables */
 var context;
@@ -366,21 +367,78 @@ $(document).ready(function () {
   });
 });
 
-//   $(document).on("click", "form button[type=submit]", function (e) {
-//     var signUpForm = $(e.target).parents("form");
-//     var isValid = isFormValid(signUpForm);
-//     if (!isValid) {
-//       e.preventDefault(); //prevent the default action
-//     }
-//   });
-
 // /* ////////////////////////////////  LOGIN ////////////////////////////////// */
-// btn_login.addEventListener("click", function () {
-//   console.log("in login!");
-//   div_welcome.classList.toggle("hide");
-//   div_login.classList.toggle("hide");
-//   currPage = "signUp";
-// });
+btn_login.addEventListener("click", function () {
+  console.log("in sign up!");
+  div_welcome.classList.toggle("hide");
+  div_login.classList.toggle("hide");
+  currPage = "login";
+});
+
+// VALIDATION USING JQUERY
+$(document).ready(function () {
+  // find Username , validate with our data
+  $("#form_login_usernamecheck").hide();
+  let usernameError = true;
+  $("#form_login_username").keyup(function () {
+    validateUsernameLogin();
+  });
+
+  function validateUsernameLogin() {
+    let usernameValue = $("#form_login_username").val();
+    if (usernameValue.length == "") {
+      $("#form_login_usernamecheck").show();
+      usernameError = false;
+      return false;
+    } else if (
+      usernameValue.length == 0 ||
+      !/\d+/.test(usernameValue) ||
+      !/[a-zA-Z]+/.test(usernameValue)
+    ) {
+      $("#form_login_usernamecheck").show();
+      $("#form_login_usernamecheck").html(
+        "**username must be not empty and includes characters and numbers!"
+      );
+      usernameError = false;
+      return false;
+    } else {
+      $("#form_login_usernamecheck").hide();
+    }
+  }
+
+  // find Password (validate with our login data)
+  $("#form_login_passcheck").hide();
+  let passwordError = true;
+  $("#form_login_pass").keyup(function () {
+    validatePasswordLogin();
+  });
+  function validatePasswordLogin() {
+    let passwordValue = $("#form_login_pass").val();
+    if (passwordValue.length == "") {
+      $("#form_login_passcheck").show();
+      passwordError = false;
+      return false;
+    } else if (![].includes(passwordValue)) {
+      // change the way it validate password (with the data array)
+      passwordError = false;
+      return false;
+    } else {
+      $("#form_login_passcheck").hide();
+    }
+  }
+
+  // Submit button
+  $("#checkLogin-btn").click(function () {
+    validateUsernameLogin();
+    validatePasswordLogin();
+    if (usernameError == true && passwordError == true) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+});
+
 /* //////////////////////////////// GAME ////////////////////////////////// */
 
 // $(document).ready(function() {
