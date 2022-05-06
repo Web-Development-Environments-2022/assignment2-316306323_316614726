@@ -1,7 +1,3 @@
-/* Page Variables */
-var currPage = "welcome";
-var currUser = null;
-
 // anchors nav bar
 const anchor_welcome = document.getElementById("welcome_a");
 const anchor_settings = document.getElementById("settings_a");
@@ -17,11 +13,16 @@ const div_login = document.getElementById("login_div");
 const div_settings = document.getElementById("settings_div");
 const div_about = document.getElementById("about_div");
 const div_top10 = document.getElementById("top10_div");
+const div_game_before = document.getElementById("game_div_before_login");
 
 // btn
 const btn_signUp = document.getElementById("signup-btn");
 const btn_login = document.getElementById("login-btn");
 const btn_checkLogin = document.getElementById("checkLogin-btn");
+
+/* Page Variables */
+var currPage = "welcome";
+var currUser = null;
 
 /* Game Variables */
 var context;
@@ -213,29 +214,70 @@ anchor_game.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
       console.log("in game!");
-      changePage(div_welcome, div_game, anchor_welcome, anchor_game, "game");
+      changePage(
+        div_welcome,
+        currUser == null ? div_game_before : div_game,
+        anchor_welcome,
+        anchor_game,
+        "game"
+      );
+      Start();
       break;
     case "settings":
       console.log("in game!");
-      changePage(div_settings, div_game, anchor_settings, anchor_game, "game");
+      changePage(
+        div_settings,
+        currUser == null ? div_game_before : div_game,
+        anchor_settings,
+        anchor_game,
+        "game"
+      );
       break;
     case "game":
       console.log("in game!");
       break;
     case "about":
-      changePage(div_about, div_game, anchor_about, anchor_game, "game");
+      changePage(
+        div_about,
+        currUser == null ? div_game_before : div_game,
+        anchor_about,
+        anchor_game,
+        "game"
+      );
+      Start();
       break;
     case "signUp":
       console.log("in game!");
-      changePage(div_signUp, div_game, anchor_welcome, anchor_game, "game");
+      changePage(
+        div_signUp,
+        currUser == null ? div_game_before : div_game,
+        anchor_welcome,
+        anchor_game,
+        "game"
+      );
+      Start();
       break;
     case "login":
       console.log("in game!");
-      changePage(div_login, div_game, anchor_welcome, anchor_game, "game");
+      changePage(
+        div_login,
+        currUser == null ? div_game_before : div_game,
+        anchor_welcome,
+        anchor_game,
+        "game"
+      );
+      Start();
       break;
     case "top10":
       console.log("in game!");
-      changePage(div_top10, div_game, anchor_top10, anchor_game, "game");
+      changePage(
+        div_top10,
+        currUser == null ? div_game_before : div_game,
+        anchor_top10,
+        anchor_game,
+        "game"
+      );
+      Start();
       break;
   }
 });
@@ -498,34 +540,13 @@ $(document).ready(function () {
     validatePasswordLogin();
 
     if (usernameError == true && passwordError == true) {
-      currUser = "k";
+      //   currUser = "k";
       return false;
     }
   });
 });
 
-document
-  .getElementById("checkLogin-btn")
-  .addEventListener("click", function (e) {
-    div_welcome = document.getElementById("welcome_div-logged-in");
-    div_login.classList.toggle("hide");
-    div_welcome.classList.toggle("hide");
-  });
-
-function StartGame() {
-  if (!currUser) {
-    return;
-  }
-  currPage = "game";
-  //   anchor_game.classList.toggle("active");
-  //   anchor_game.classList.toggle("hide");
-
-  //   div_login.classList.toggle("hide");
-  //   div_game.classList.toggle("hide");
-}
-
 /* //////////////////////////////// GAME ////////////////////////////////// */
-
 $(document).ready(function () {
   context = canvas.getContext("2d");
 });

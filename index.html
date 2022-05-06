@@ -14,7 +14,7 @@
       <a class="active" id="welcome_a">Welcome</a>
       <a id="settings_a">Settings</a>
       <a id="top10_a">Top 10!</a>
-      <a id="game_a">Let's Pack Man!</a>
+      <a id="game_a">Play Pack Man!</a>
       <a id="about_a">About</a>
     </nav>
 
@@ -160,31 +160,32 @@
             <input type="submit" value="Login" id="checkLogin-btn" />
           </form>
         </div>
+      </div>
 
-        <div class="hide" id="settings_div"></div>
+      <div id="settings_div" class="hide">
+        <h1>Hello! Settings</h1>
+      </div>
 
-        <div class="hide" id="top10_div">
-          <h1>Top 10 Games Played:</h1>
-        </div>
+      <div class="hide" id="top10_div">
+        <h1>Top 10 Games Played:</h1>
+      </div>
 
-        <div class="hide" id="about_div"></div>
+      <div class="hide" id="about_div"></div>
 
-        <div class="hide" id="game_div_before_login">
-          <h2>Please Login first!</h2>
-        </div>
+      <div id="game_div_before_login" class="hide">
+        <h2>Please Login first!</h2>
+      </div>
 
-        <div class="hide" id="game_div">
-          <h1>Hello</h1>
-          <div id="score">
+      <div id="game_div" class="hide">
+        <div id="score">
           <label for="lblScore">SCORE:</label>
           <input id="lblScore" type="text" />
         </div>
         <div id="time">
           <label for="lblTime">TIME:</label>
           <input id="lblTime" type="text" /> -->
-
-          <canvas id="canvas" height="600" width="600"></canvas>
         </div>
+        <canvas id="canvas" height="600" width="600"></canvas>
       </div>
     </div>
 
@@ -194,7 +195,6 @@
         <a href="mailto:Ori-Dor@gmail.com">Ori-Dor@gmail.com</a>
       </p>
     </footer>
-
     <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>
