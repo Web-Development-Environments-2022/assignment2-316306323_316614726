@@ -42,7 +42,7 @@
           alt="Logo!"
           style="height: 150px"
         /><br />
-        <h1 id="logged_in_welcome">Welcome</h1>
+        <h1 id="logged_in_welcome"></h1>
         <button id="logout-btn" class="btn-welcome-in">
           <!--onclick="moveSignIn()" -->
           Logout
@@ -131,7 +131,12 @@
 
       <div class="hide" id="login_div">
         <div class="container">
-          <form onsubmit="StartGame()">
+          <form>
+            <h5 id="form_login_error_message" style="color: red">
+              **User or password not correct! Please try again or create new
+              user!
+            </h5>
+            <br />
             <!-- action="action_page.php" -->
             <label for="form_login_username">User Name</label>
             <input
@@ -177,6 +182,7 @@
       </div>
 
       <div id="game_div" class="hide">
+        <h1>game_div open</h1>
         <div id="score">
           <label for="lblScore">SCORE:</label>
           <input id="lblScore" type="text" />

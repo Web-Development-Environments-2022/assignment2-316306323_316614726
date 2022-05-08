@@ -1,3 +1,14 @@
+// classes
+class User {
+  constructor(name, username, password, email, dateOfBirth) {
+    this.name = name;
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.dateOfBirth = dateOfBirth;
+  }
+}
+
 // anchors nav bar
 const anchor_welcome = document.getElementById("welcome_a");
 const anchor_settings = document.getElementById("settings_a");
@@ -7,6 +18,7 @@ const anchor_about = document.getElementById("about_a");
 
 // divs
 const div_welcome = document.getElementById("welcome_div");
+const div_welcome_login = document.getElementById("welcome_div-logged-in");
 const div_game = document.getElementById("game_div");
 const div_signUp = document.getElementById("signup_div");
 const div_login = document.getElementById("login_div");
@@ -19,10 +31,14 @@ const div_game_before = document.getElementById("game_div_before_login");
 const btn_signUp = document.getElementById("signup-btn");
 const btn_login = document.getElementById("login-btn");
 const btn_checkLogin = document.getElementById("checkLogin-btn");
+const btn_logout = document.getElementById("logout-btn");
 
 /* Page Variables */
 var currPage = "welcome";
 var currUser = null;
+
+// DB
+var users = {};
 
 /* Game Variables */
 var context;
@@ -64,51 +80,84 @@ anchor_welcome.addEventListener("click", function () {
     case "settings":
       changePage(
         div_settings,
-        div_welcome,
+        currUser ? div_welcome_login : div_welcome,
         anchor_settings,
         anchor_welcome,
-        "welcome"
+        currUser ? "welcome-login" : "welcome"
       );
       console.log("in welcome!");
       break;
     case "game":
-      changePage(div_game, div_welcome, anchor_game, anchor_welcome, "welcome");
+      changePage(
+        div_game,
+        currUser ? div_welcome_login : div_welcome,
+        anchor_game,
+        anchor_welcome,
+        currUser ? "welcome-login" : "welcome"
+      );
       console.log("in welcome!");
       break;
     case "about":
       console.log("in welcome!");
       changePage(
         div_about,
-        div_welcome,
+        currUser ? div_welcome_login : div_welcome,
         anchor_about,
         anchor_welcome,
-        "welcome"
+        currUser ? "welcome-login" : "welcome"
       );
       break;
     case "signUp":
       console.log("in welcome!");
-      changePage(div_signUp, div_welcome, false, false, "welcome");
+      changePage(
+        div_signUp,
+        currUser ? div_welcome_login : div_welcome,
+        false,
+        false,
+        currUser ? "welcome-login" : "welcome"
+      );
 
       break;
     case "login":
       console.log("in welcome!");
-      changePage(div_login, div_welcome, false, false, "welcome");
+      changePage(
+        div_login,
+        currUser ? div_welcome_login : div_welcome,
+        false,
+        false,
+        currUser ? "welcome-login" : "welcome"
+      );
       break;
 
     case "top10":
       console.log("in welcome!");
       changePage(
         div_top10,
-        div_welcome,
+        currUser ? div_welcome_login : div_welcome,
         anchor_top10,
         anchor_welcome,
-        "welcome"
+        currUser ? "welcome-login" : "welcome"
       );
+      break;
+
+    case "welcome-login":
+      console.log(`hello ${currUser}`);
       break;
   }
 });
 anchor_settings.addEventListener("click", function () {
   switch (currPage) {
+    case "welcome-login":
+      console.log("in settings!");
+      changePage(
+        div_welcome_login,
+        div_settings,
+        anchor_welcome,
+        anchor_settings,
+        "settings"
+      );
+      break;
+
     case "welcome":
       console.log("in settings!");
       changePage(
@@ -175,6 +224,16 @@ anchor_settings.addEventListener("click", function () {
 });
 anchor_top10.addEventListener("click", function () {
   switch (currPage) {
+    case "welcome-login":
+      console.log("in top10!");
+      changePage(
+        div_welcome_login,
+        div_top10,
+        anchor_welcome,
+        anchor_top10,
+        "settings"
+      );
+      break;
     case "welcome":
       console.log("in top10!");
       changePage(div_welcome, div_top10, anchor_welcome, anchor_top10, "top10");
@@ -212,71 +271,45 @@ anchor_top10.addEventListener("click", function () {
 
 anchor_game.addEventListener("click", function () {
   switch (currPage) {
-    case "welcome":
-      console.log("in game!");
+    case "welcome-login":
+      console.log("in top10!");
       changePage(
-        div_welcome,
-        currUser == null ? div_game_before : div_game,
+        div_welcome_login,
+        div_game,
         anchor_welcome,
         anchor_game,
         "game"
       );
+      break;
+    case "welcome":
+      console.log("in game!");
+      changePage(div_welcome, div_game, anchor_welcome, anchor_game, "game");
       Start();
       break;
     case "settings":
       console.log("in game!");
-      changePage(
-        div_settings,
-        currUser == null ? div_game_before : div_game,
-        anchor_settings,
-        anchor_game,
-        "game"
-      );
+      changePage(div_settings, div_game, anchor_settings, anchor_game, "game");
       break;
     case "game":
       console.log("in game!");
       break;
     case "about":
-      changePage(
-        div_about,
-        currUser == null ? div_game_before : div_game,
-        anchor_about,
-        anchor_game,
-        "game"
-      );
+      changePage(div_about, div_game, anchor_about, anchor_game, "game");
       Start();
       break;
     case "signUp":
       console.log("in game!");
-      changePage(
-        div_signUp,
-        currUser == null ? div_game_before : div_game,
-        anchor_welcome,
-        anchor_game,
-        "game"
-      );
+      changePage(div_signUp, div_game, anchor_welcome, anchor_game, "game");
       Start();
       break;
     case "login":
       console.log("in game!");
-      changePage(
-        div_login,
-        currUser == null ? div_game_before : div_game,
-        anchor_welcome,
-        anchor_game,
-        "game"
-      );
+      changePage(div_login, div_game, anchor_welcome, anchor_game, "game");
       Start();
       break;
     case "top10":
       console.log("in game!");
-      changePage(
-        div_top10,
-        currUser == null ? div_game_before : div_game,
-        anchor_top10,
-        anchor_game,
-        "game"
-      );
+      changePage(div_top10, div_game, anchor_top10, anchor_game, "game");
       Start();
       break;
   }
@@ -284,6 +317,16 @@ anchor_game.addEventListener("click", function () {
 
 anchor_about.addEventListener("click", function () {
   switch (currPage) {
+    case "welcome-login":
+      console.log("in about!");
+      changePage(
+        div_welcome_login,
+        div_about,
+        anchor_welcome,
+        anchor_about,
+        "about"
+      );
+      break;
     case "welcome":
       console.log("in about!");
       changePage(div_welcome, div_about, anchor_welcome, anchor_about, "about");
@@ -334,6 +377,7 @@ $(document).ready(function () {
   $("#usernamecheck").hide();
   let usernameError = true;
   $("#form_username").keyup(function () {
+    usernameError = true;
     validateUsername();
   });
 
@@ -363,8 +407,8 @@ $(document).ready(function () {
   const email = document.getElementById("form_email");
   email.addEventListener("blur", () => {
     let regex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
-    let s = email.value;
-    if (regex.test(s)) {
+    let emailValue = email.value;
+    if (regex.test(emailValue)) {
       $("#confemail").hide();
       emailError = true;
     } else {
@@ -375,8 +419,9 @@ $(document).ready(function () {
 
   // Validate Password
   $("#passcheck").hide();
-  let passwordError = true;
+  var passwordError = true;
   $("#form_pass").keyup(function () {
+    passwordError = true;
     validatePassword();
   });
   function validatePassword() {
@@ -428,6 +473,7 @@ $(document).ready(function () {
   $("#namecheck").hide();
   let nameError = true;
   $("#form_name").keyup(function () {
+    nameError = true;
     validateName();
   });
 
@@ -450,11 +496,13 @@ $(document).ready(function () {
   }
 
   // Submit button
-  $("#btn_submit").click(function () {
+  $("#btn_submit").click(function (e) {
+    e.preventDefault();
+
     validateUsername();
     validatePassword();
     validateConfirmPassword();
-    validateEmail();
+    // validateEmail();
     validateName();
     if (
       usernameError == true &&
@@ -463,7 +511,32 @@ $(document).ready(function () {
       emailError == true &&
       nameError == true
     ) {
-      // register new user <<---
+      // get all fields
+      let usernameValue = $("#form_username").val();
+      let emailValue = $("#form_email").val();
+      let passwordValue = $("#form_pass").val();
+      let nameValue = $("#form_name").val();
+      let dateValue = $("#form_birthdate").val();
+
+      // register new user
+      users[usernameValue] = new User(
+        nameValue,
+        usernameValue,
+        passwordValue,
+        emailValue,
+        dateValue
+      );
+
+      // switch back welcome page
+      changePage(div_signUp, div_welcome, false, false, "welcome");
+
+      // clean input fields
+      $("#form_username").val("");
+      $("#form_email").val("");
+      $("#form_pass").val("");
+      $("#form_conf_pass").val("");
+      $("#form_name").val("");
+      $("#form_birthdate").val("1995-01-01"); //default val
       return true;
     } else {
       return false;
@@ -483,24 +556,17 @@ btn_login.addEventListener("click", function () {
 $(document).ready(function () {
   // find Username , validate with our data
   $("#form_login_usernamecheck").hide();
+  $("#form_login_error_message").hide();
   let usernameError = true;
   $("#form_login_username").keyup(function () {
+    $("#form_login_error_message").hide();
+    usernameError = true;
     validateUsernameLogin();
   });
 
   function validateUsernameLogin() {
     let usernameValue = $("#form_login_username").val();
     if (usernameValue.length == "") {
-      $("#form_login_usernamecheck").show();
-      usernameError = false;
-      return false;
-    } else if (
-      false
-      //   usernameValue.length == 0 ||
-      //   !/\d+/.test(usernameValue) ||
-      //   !/[a-zA-Z]+/.test(usernameValue)
-    ) {
-      console.log("here error");
       $("#form_login_usernamecheck").show();
       $("#form_login_usernamecheck").html(
         "**username must be not empty and includes characters and numbers!"
@@ -516,16 +582,14 @@ $(document).ready(function () {
   $("#form_login_passcheck").hide();
   let passwordError = true;
   $("#form_login_pass").keyup(function () {
+    $("#form_login_error_message").hide();
     validatePasswordLogin();
   });
   function validatePasswordLogin() {
     let passwordValue = $("#form_login_pass").val();
     if (passwordValue.length == "") {
       $("#form_login_passcheck").show();
-      passwordError = false;
-      return false;
-    } else if (false) {
-      // change the way it validate password (with the data array)
+      $("#form_login_passcheck").html("**password must be not empty!");
       passwordError = false;
       return false;
     } else {
@@ -540,12 +604,36 @@ $(document).ready(function () {
     validatePasswordLogin();
 
     if (usernameError == true && passwordError == true) {
-      //   currUser = "k";
+      let usernameValue = $("#form_login_username").val();
+      let passwordValue = $("#form_login_pass").val();
+      let userLogin = users[usernameValue] ? users[usernameValue] : null;
+      if (userLogin && userLogin.password === passwordValue) {
+        currUser = userLogin;
+
+        // set welcome message to specific user
+        $("#logged_in_welcome").text(`Welcome back, ${userLogin.name}!`);
+
+        // change window to login success!
+        changePage(div_login, div_welcome_login, false, false, "welcome-login");
+
+        // clear fields
+        $("#form_login_username").val("");
+        $("#form_login_pass").val("");
+
+        return true;
+      }
+      $("#form_login_error_message").show();
       return false;
     }
+    return false;
   });
 });
 
+/* //////////////////////////////// LOGOUT ////////////////////////////////// */
+btn_logout.addEventListener("click", function () {
+  currUser = null;
+  changePage(div_welcome_login, div_welcome, false, false, "welcome");
+});
 /* //////////////////////////////// GAME ////////////////////////////////// */
 $(document).ready(function () {
   context = canvas.getContext("2d");
