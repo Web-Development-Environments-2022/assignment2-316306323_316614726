@@ -198,7 +198,50 @@
               <input id="choose_button_right" type="button" value="right" />
             </div>
 
-            <input type="submit" value="Login" id="settings-btn" />
+            <h5>Balls:</h5>
+            <!-- Amount -->
+            <div class="btn-choose-container">
+              <label for="balls-amount">Amount</label>
+              <input type="range" min="50" max="90" value="50" class="slider" id="ballsAmountRange">
+              <p id="display-balls-amount"></p>
+            </div>
+            <!-- Color 5 point -->
+            <div class="btn-choose-container">
+              <label for="5-point-color">Choose color for 5 points balls: </label>
+              <input type="color" id="5colorpicker" value="#ff0000" style="width:5%;">
+            </div>
+            <!-- Color 15 point -->
+            <div class="btn-choose-container">
+              <label for="15-point-color">Choose color for 15 points balls: </label>
+              <input type="color" id="15colorpicker" value="#ff0000" style="width:5%;">
+            </div>
+             <!-- Color 25 point -->
+             <div class="btn-choose-container">
+              <label for="25-point-color">Choose color for 25 points balls: </label>
+              <input type="color" id="25colorpicker" value="#ff0000" style="width:5%;">
+            </div>
+
+            <h5>Time:</h5>
+            <div class="btn-choose-container">
+              <label for="time-amount">Game timer (sec):</label>
+              <input id="game_timer_picker" value="60">
+              <h5 id="game_timer_picker_error_message" style="color: red"></h5>
+            </div>
+
+            <h5>Monsters:</h5>
+            <div class="btn-choose-container">
+              <label for="monsters-amount">Monsters amount:</label>
+              <input type="range" min="1" max="4" value="1" class="slider" id="monstersAmountRange">
+              <p id="display-monsters-amount"></p>
+            </div>
+
+            <h5>Random:</h5>
+            <div class="btn-choose-container">
+              <label for="random">Choose random values for me: </label>
+              <button id="randomPicker">Random</button>
+            </div>
+
+            <input type="submit" value="Apply" id="settings-btn" />
           </form>
         </div>
 

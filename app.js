@@ -52,6 +52,17 @@ var start_time;
 var time_elapsed;
 var interval;
 
+// added by dor
+var numOfBalls;
+var numOfBalls_5;
+var numOfBalls_15;
+var numOfBalls_25;
+var balls_color_5;
+var balls_color_15;
+var balls_color_25;
+var gameTime;
+var monstersNum;
+
 /* ////////////////////////////////  NAV PAGES ////////////////////////////////// */
 
 function changePage(
@@ -714,6 +725,78 @@ btn_logout.addEventListener("click", function () {
   currUser = null;
   changePage(div_welcome_login, div_welcome, false, false, "welcome");
 });
+
+/* /////////////////////////////// SETTINGS /////////////////////// */
+
+////////////// BALLS AMOUNT /////////////////
+var ballsSlider = document.getElementById("ballsAmountRange");
+var ballsAmountDisplayer = document.getElementById("display-balls-amount");
+// Set first values
+ballsAmountDisplayer.innerHTML = ballsSlider.value; 
+numOfBalls = parseInt(ballsSlider.value);
+numOfBalls_5 = Math.floor(numOfBalls*0.6);
+numOfBalls_15 = Math.floor(numOfBalls*0.3);
+numOfBalls_25 = numOfBalls-numOfBalls_15-numOfBalls_5;
+// Update the current slider value (each time you drag the slider handle)
+ballsSlider.oninput = function() {
+  ballsAmountDisplayer.innerHTML = this.value;
+  numOfBalls = parseInt(this.value);
+  numOfBalls_5 = Math.floor(numOfBalls*0.6);
+  numOfBalls_15 = Math.floor(numOfBalls*0.3);
+  numOfBalls_25 = numOfBalls-numOfBalls_15-numOfBalls_5;
+}
+
+////////////// COLOR PICKER /////////////////
+var colorPicker5 = document.getElementById("5colorpicker");
+var colorPicker15 = document.getElementById("15colorpicker");
+var colorPicker25 = document.getElementById("25colorpicker");
+// default
+balls_color_5 = colorPicker5.value;
+balls_color_15 = colorPicker15.value;
+balls_color_25 = colorPicker25.value;
+
+colorPicker5.onchange = function(){
+  balls_color_5 = colorPicker5.value;
+}
+colorPicker15.onchange = function(){
+  balls_color_15 = colorPicker15.value;
+}
+colorPicker25.onchange = function(){
+  balls_color_25 = colorPicker25.value;
+}
+
+////////////// TIME AMOUNT ///////////////// 
+var gameTimerPicker = document.getElementById("game_timer_picker");
+gameTimerPicker.onchange = function(e){ // ---->>> not working :(
+  gameTime = gameTimerPicker.value;
+  let errMsg = document.getElementById("game_timer_picker_error_message");
+  if(parseInt(gameTime) < 60){
+    errMsg.innerHTML = "*Time has to be more than 60 seconds"
+  }
+  else{
+    errMsg.innerHTML = ""
+  }
+}
+
+/////////////// MONSTERS AMOUNT /////////////
+var monstersSlider = document.getElementById("monstersAmountRange");
+var monstersAmountDisplayer = document.getElementById("display-monsters-amount");
+// Set first values
+monstersAmountDisplayer.innerHTML = monstersSlider.value; 
+numOfMonsters = parseInt(monstersSlider.value);
+// Update the current slider value (each time you drag the slider handle)
+monstersSlider.oninput = function() {
+  monstersAmountDisplayer.innerHTML = this.value;
+  numOfMonsters = parseInt(this.value);
+}
+
+////////////// RANDOM //////////////
+var btn_random = document.getElementById("randomPicker");
+btn_random.onclick = function(){
+  ballsSlider.value = Math.floor(Math.random() * (90 - 50) ) + 50;
+  numOfBalls = parseInt(ballsSlider.value);
+  ballsAmountDisplayer.innerHTML = ballsSlider.value; 
+}
 
 /* /////////////////////////////// SETTINGS -> Modal /////////////////////// */
 // Get the modal
