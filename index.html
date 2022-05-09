@@ -168,7 +168,48 @@
       </div>
 
       <div id="settings_div" class="hide">
-        <h1>Hello! Settings</h1>
+        <h1>Please login first to change the game's settings!</h1>
+      </div>
+
+      <div id="settings_div-logged-in" class="hide">
+        <h1>You are at settings login</h1>
+        <!-- FORM -->
+        <div class="container">
+          <form>
+            <h5>Please choose your move buttons:</h5>
+            <!-- UP -->
+            <div class="btn-choose-container">
+              <label for="up-key">UP (add sign)</label>
+              <input id="choose_button_up" type="button" value="up" />
+            </div>
+            <!-- DOWN -->
+            <div class="btn-choose-container">
+              <label for="down-key">DOWN (add sign)</label>
+              <input id="choose_button_down" type="button" value="down" />
+            </div>
+            <!-- LEFT -->
+            <div class="btn-choose-container">
+              <label for="left-key">LEFT (add sign)</label>
+              <input id="choose_button_left" type="button" value="left" />
+            </div>
+            <!-- RIGHT -->
+            <div class="btn-choose-container">
+              <label for="right-key">RIGHT (add sign)</label>
+              <input id="choose_button_right" type="button" value="right" />
+            </div>
+
+            <input type="submit" value="Login" id="settings-btn" />
+          </form>
+        </div>
+
+        <!-- The Modal -->
+        <div id="keyModal" class="keyModal">
+          <!-- Modal content -->
+          <div class="keyModal-content">
+            <span class="closeKeyModal">&times;</span>
+            <p id="keyModalP">Press your key to move</p>
+          </div>
+        </div>
       </div>
 
       <div class="hide" id="top10_div">
@@ -181,8 +222,8 @@
         <h2>Please Login first!</h2>
       </div>
 
-      <div id="game_div" class="hide">
-        <h1>game_div open</h1>
+      <div id="game_div-logged-in" class="hide">
+        <h1>Let's Play Pacman</h1>
         <div id="score">
           <label for="lblScore">SCORE:</label>
           <input id="lblScore" type="text" />
@@ -192,6 +233,10 @@
           <input id="lblTime" type="text" /> -->
         </div>
         <canvas id="canvas" height="600" width="600"></canvas>
+      </div>
+
+      <div id="game_div" class="hide">
+        <h1>If you want to play Pacman please login first!</h1>
       </div>
     </div>
 
