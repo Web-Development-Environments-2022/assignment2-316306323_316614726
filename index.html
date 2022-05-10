@@ -180,23 +180,24 @@
             <!-- UP -->
             <div class="btn-choose-container">
               <label for="up-key">UP (add sign)</label>
-              <input id="choose_button_up" type="button" value="up" />
+              <input id="choose_button_up" type="button" value="ArrowUp" />
             </div>
             <!-- DOWN -->
             <div class="btn-choose-container">
               <label for="down-key">DOWN (add sign)</label>
-              <input id="choose_button_down" type="button" value="down" />
+              <input id="choose_button_down" type="button" value="ArrowDown" />
             </div>
             <!-- LEFT -->
             <div class="btn-choose-container">
               <label for="left-key">LEFT (add sign)</label>
-              <input id="choose_button_left" type="button" value="left" />
+              <input id="choose_button_left" type="button" value="ArrowLeft" />
             </div>
             <!-- RIGHT -->
             <div class="btn-choose-container">
               <label for="right-key">RIGHT (add sign)</label>
-              <input id="choose_button_right" type="button" value="right" />
+              <input id="choose_button_right" type="button" value="ArrowRight" />
             </div>
+            <h5 id="arrows_settings_error_message" style="color: red"></h5>
 
             <h5>Balls:</h5>
             <!-- Amount -->
@@ -220,12 +221,13 @@
               <label for="25-point-color">Choose color for 25 points balls: </label>
               <input type="color" id="25colorpicker" value="#ff0000" style="width:5%;">
             </div>
+            <h5 id="balls_settings_error_message" style="color: red"></h5>
 
             <h5>Time:</h5>
             <div class="btn-choose-container">
               <label for="time-amount">Game timer (sec):</label>
               <input id="game_timer_picker" value="60">
-              <h5 id="game_timer_picker_error_message" style="color: red"></h5>
+              <h5 id="time_settings_error_message" style="color: red"></h5>
             </div>
 
             <h5>Monsters:</h5>
@@ -238,10 +240,11 @@
             <h5>Random:</h5>
             <div class="btn-choose-container">
               <label for="random">Choose random values for me: </label>
-              <button id="randomPicker">Random</button>
+              <button type="button" id="randomPicker">Random</button>
             </div>
 
-            <input type="submit" value="Apply" id="settings-btn" />
+            <input type="button" value="Play!" id="settings-btn-apply" />
+            <h5 id="settings_error_message" style="color: red"></h5>
           </form>
         </div>
 

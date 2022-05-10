@@ -767,15 +767,8 @@ colorPicker25.onchange = function(){
 
 ////////////// TIME AMOUNT ///////////////// 
 var gameTimerPicker = document.getElementById("game_timer_picker");
-gameTimerPicker.onchange = function(e){ // ---->>> not working :(
-  gameTime = gameTimerPicker.value;
-  let errMsg = document.getElementById("game_timer_picker_error_message");
-  if(parseInt(gameTime) < 60){
-    errMsg.innerHTML = "*Time has to be more than 60 seconds"
-  }
-  else{
-    errMsg.innerHTML = ""
-  }
+gameTimerPicker.onchange = function(e){
+  gameTime = parseInt(gameTimerPicker.value);  // ---->>> need fix to number and string :(
 }
 
 /////////////// MONSTERS AMOUNT /////////////
@@ -793,12 +786,44 @@ monstersSlider.oninput = function() {
 ////////////// RANDOM //////////////
 var btn_random = document.getElementById("randomPicker");
 btn_random.onclick = function(){
+
+  // set num of balls
   ballsSlider.value = Math.floor(Math.random() * (90 - 50) ) + 50;
   numOfBalls = parseInt(ballsSlider.value);
   ballsAmountDisplayer.innerHTML = ballsSlider.value; 
+
+  // set num of monsters
+  monstersSlider.value = Math.floor(Math.random() * (4 - 1) ) + 1;
+  numOfMonsters = parseInt(monstersSlider.value);
+  monstersAmountDisplayer.innerHTML = monstersSlider.value; 
+
+  // set time
+  gameTime = Math.floor(Math.random() * (300 - 60) ) + 60;
+  gameTimerPicker.value = gameTime;
+
+  // set colors
+  balls_color_5 = "#" + Math.floor(Math.random()*16777215).toString(16);
+  balls_color_15 = "#" + Math.floor(Math.random()*16777215).toString(16);
+  balls_color_25 = "#" + Math.floor(Math.random()*16777215).toString(16);
+  colorPicker5.value = balls_color_5;
+  colorPicker15.value = balls_color_15;
+  colorPicker25.value = balls_color_25;
+
+  // set arrows to default
+  upKey = 38;
+  downKey = 40;
+  leftKey = 37;
+  rightKey = 39;
+
+  document.getElementById("choose_button_up").value = "ArrowUp";
+  document.getElementById("choose_button_down").value = "ArrowDown";
+  document.getElementById("choose_button_left").value = "ArrowLeft";
+  document.getElementById("choose_button_right").value = "ArrowRight";
+
 }
 
-/* /////////////////////////////// SETTINGS -> Modal /////////////////////// */
+
+/* /////////////////////////////// ARROWS /////////////////////// */
 // Get the modal
 var keyModal = document.getElementById("keyModal");
 
@@ -808,6 +833,7 @@ var btnDown = document.getElementById("choose_button_down");
 var btnLeft = document.getElementById("choose_button_left");
 var btnRight = document.getElementById("choose_button_right");
 var keyModalP = document.getElementById("keyModalP");
+var btnApplySettings = document.getElementById("settings-btn-apply");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("closeKeyModal")[0];
@@ -821,64 +847,117 @@ var rightKey = 39;
 var chooseKey = null;
 
 // When the user clicks on the button, open the modal
-btnUp.onclick = function () {
-  console.log(keyModal);
-  keyModalP.innerText += " UP...."; // change the chaining of up up up
-  chooseKey = "up";
-  keyModal.style.display = "block";
+// btnUp.onclick = function () {
+//   console.log(keyModal);
+//   keyModalP.innerText += " UP...."; // change the chaining of up up up
+//   chooseKey = "up";
+//   keyModal.style.display = "block";
+// };
+btnUp.onclick = function setKeyUp(){
+  $(document).on('keydown',function(event){
+      upKey = event.keyCode;
+      document.getElementById("choose_button_up").value = event.key;
+      $(document).off('keydown');
+    })
+    
+  
+}
+btnDown.onclick = function setKeyDown(){
+  $(document).on('keydown',function(event){
+      downKey = event.keyCode;
+      document.getElementById("choose_button_down").value = event.key;
+      $(document).off('keydown');
+    })
+    
 };
-btnDown.onclick = function (e) {
-  keyModalP.innerText += " DOWN....";
-  chooseKey = "down";
-  keyModal.style.display = "block";
+btnLeft.onclick = function setKeyLeft(){
+  $(document).on('keydown',function(event){
+      leftKey = event.keyCode;
+      document.getElementById("choose_button_left").value = event.key;
+
+      $(document).off('keydown');
+    })
+    
 };
-btnLeft.onclick = function (e) {
-  keyModalP.innerText += " LEFT....";
-  chooseKey = "left";
-  keyModal.style.display = "block";
-};
-btnRight.onclick = function (e) {
-  keyModalP.innerText += " RIGHT....";
-  chooseKey = "right";
-  keyModal.style.display = "block";
+btnRight.onclick = function setKeyRight(){
+  $(document).on('keydown',function(event){
+      rightKey = event.keyCode;
+      document.getElementById("choose_button_right").value = event.key;
+      $(document).off('keydown');
+    })
+    
 };
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  keyModal.style.display = "none";
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == keyModal) {
-    keyModal.style.display = "none";
+btnApplySettings.onclick = function validateSettings(){
+  console.log(gameTime)
+  isValid = true
+  let errMsgArrows = document.getElementById("arrows_settings_error_message");
+  let errMsgBalls = document.getElementById("balls_settings_error_message");
+  let errMsgTime = document.getElementById("time_settings_error_message");
+  errMsgArrows.innerHTML = "";
+  errMsgBalls.innerHTML = "";
+  errMsgTime.innerHTML = "";
+  if(gameTime < 60 || gameTime > 300 || !gameTime){
+    errMsgTime.innerHTML ="*Time has to be more a number between 60 to 300 "
+    isValid = false;
   }
-};
-
-keyModal.addEventListener("keypress", function (e) {
-  console.log("keypressed!");
-  if (e.key !== "Escape") {
-    switch (chooseKey) {
-      case "up":
-        upKey = e.keyCode;
-        btnUp.value = e.key;
-        break;
-      case "down":
-        downKey = e.keyCode;
-        btnDown.value = e.key;
-        break;
-      case "left":
-        btnLeft.value = e.key;
-        leftKey = e.keyCode;
-        break;
-      case "right":
-        btnRight.value = e.key;
-        rightKey = e.keyCode;
-        break;
-    }
+  if(balls_color_5==balls_color_15 || balls_color_15==balls_color_25 ||  balls_color_5==balls_color_25){
+    errMsgBalls.innerHTML = "*Balls must have different colors "
+    isValid = false;
   }
-  keyModal.style.display = "none";
-});
+  if(upKey == downKey || upKey == rightKey || upKey == leftKey || downKey == rightKey || downKey == leftKey || leftKey ==rightKey){
+    errMsgArrows.innerHTML ="*Move buttons must be different keys " 
+    isValid = false;
+  }
+  if(isValid){
+    changePage(
+      div_settings_login,
+      div_game_login,
+      anchor_settings,
+      anchor_game,
+      "game-login"
+    )
+  }
+
+}
+
+
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function () {
+//   keyModal.style.display = "none";
+// };
+
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function (event) {
+//   if (event.target == keyModal) {
+//     keyModal.style.display = "none";
+//   }
+// };
+
+// keyModal.addEventListener("keypress", function (e) {
+//   console.log("keypressed!");
+//   if (e.key !== "Escape") {
+//     switch (chooseKey) {
+//       case "up":
+//         upKey = e.keyCode;
+//         btnUp.value = e.key;
+//         break;
+//       case "down":
+//         downKey = e.keyCode;
+//         btnDown.value = e.key;
+//         break;
+//       case "left":
+//         btnLeft.value = e.key;
+//         leftKey = e.keyCode;
+//         break;
+//       case "right":
+//         btnRight.value = e.key;
+//         rightKey = e.keyCode;
+//         break;
+//     }
+//   }
+//   keyModal.style.display = "none";
+// });
 
 /* //////////////////////////////// GAME ////////////////////////////////// */
 $(document).ready(function () {
