@@ -83,6 +83,10 @@ function changePage(
   }
 
   currPage = caseName;
+
+  if(caseName == "game-login"){
+    Start();
+  }
 }
 
 anchor_welcome.addEventListener("click", function () {
@@ -824,19 +828,13 @@ btn_random.onclick = function(){
 
 
 /* /////////////////////////////// ARROWS /////////////////////// */
-// Get the modal
-var keyModal = document.getElementById("keyModal");
 
 // Get the button that opens the modal
 var btnUp = document.getElementById("choose_button_up");
 var btnDown = document.getElementById("choose_button_down");
 var btnLeft = document.getElementById("choose_button_left");
 var btnRight = document.getElementById("choose_button_right");
-var keyModalP = document.getElementById("keyModalP");
 var btnApplySettings = document.getElementById("settings-btn-apply");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("closeKeyModal")[0];
 
 // settings variables
 var upKey = 38;
@@ -844,24 +842,15 @@ var downKey = 40;
 var leftKey = 37;
 var rightKey = 39;
 
-var chooseKey = null;
 
-// When the user clicks on the button, open the modal
-// btnUp.onclick = function () {
-//   console.log(keyModal);
-//   keyModalP.innerText += " UP...."; // change the chaining of up up up
-//   chooseKey = "up";
-//   keyModal.style.display = "block";
-// };
 btnUp.onclick = function setKeyUp(){
   $(document).on('keydown',function(event){
       upKey = event.keyCode;
       document.getElementById("choose_button_up").value = event.key;
       $(document).off('keydown');
     })
-    
-  
 }
+
 btnDown.onclick = function setKeyDown(){
   $(document).on('keydown',function(event){
       downKey = event.keyCode;
@@ -889,7 +878,6 @@ btnRight.onclick = function setKeyRight(){
 };
 
 btnApplySettings.onclick = function validateSettings(){
-  console.log(gameTime)
   isValid = true
   let errMsgArrows = document.getElementById("arrows_settings_error_message");
   let errMsgBalls = document.getElementById("balls_settings_error_message");
@@ -921,56 +909,31 @@ btnApplySettings.onclick = function validateSettings(){
 
 }
 
-
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-//   keyModal.style.display = "none";
-// };
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//   if (event.target == keyModal) {
-//     keyModal.style.display = "none";
-//   }
-// };
-
-// keyModal.addEventListener("keypress", function (e) {
-//   console.log("keypressed!");
-//   if (e.key !== "Escape") {
-//     switch (chooseKey) {
-//       case "up":
-//         upKey = e.keyCode;
-//         btnUp.value = e.key;
-//         break;
-//       case "down":
-//         downKey = e.keyCode;
-//         btnDown.value = e.key;
-//         break;
-//       case "left":
-//         btnLeft.value = e.key;
-//         leftKey = e.keyCode;
-//         break;
-//       case "right":
-//         btnRight.value = e.key;
-//         rightKey = e.keyCode;
-//         break;
-//     }
-//   }
-//   keyModal.style.display = "none";
-// });
-
 /* //////////////////////////////// GAME ////////////////////////////////// */
 $(document).ready(function () {
   context = canvas.getContext("2d");
 });
 
+
+var monsterImg = new Image();
+monsterImg.src = "./resources/monster.png";
 function Start() {
   board = new Array();
   score = 0;
   pac_color = "yellow";
-  var cnt = 100;
-  var food_remain = 50;
-  var pacman_remain = 1;
+  
+  var food_remain = numOfBalls;
+  
+  let ballsOptionsArr = []
+  for(let i = 0; i<numOfBalls_5;i++){
+    ballsOptionsArr.push(5);
+  }
+  for(let i = 0; i<numOfBalls_15;i++){
+    ballsOptionsArr.push(15);
+  }
+  for(let i = 0; i<numOfBalls_25;i++){
+    ballsOptionsArr.push(25);
+  }
   start_time = new Date();
   for (var i = 0; i < 10; i++) {
     board[i] = new Array();
@@ -984,28 +947,42 @@ function Start() {
         (i == 6 && j == 2)
       ) {
         board[i][j] = 4;
-      } else {
-        var randomNum = Math.random();
-        if (randomNum <= (1.0 * food_remain) / cnt) {
-          food_remain--;
-          board[i][j] = 1;
-        } else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-          shape.i = i;
-          shape.j = j;
-          pacman_remain--;
-          board[i][j] = 2;
-        } else {
-          board[i][j] = 0;
+      }
+      else if((i==0 && j == 0 )|| (i== 9 && j == 0 ) || (i== 0 && j == 9 ) || (i== 9 && j == 9)){
+        if(numOfMonsters > 0){
+          board[i][j] = "M";
+          numOfMonsters--;
         }
-        cnt--;
+      }
+      else{   
+          board[i][j] = 0;
+      }
       }
     }
-  }
+
+  //}
   while (food_remain > 0) {
     var emptyCell = findRandomEmptyCell(board);
-    board[emptyCell[0]][emptyCell[1]] = 1;
     food_remain--;
+    indxBallToPut = Math.floor(Math.random() * ballsOptionsArr.length);
+    if(ballsOptionsArr[indxBallToPut] == 5){
+      board[emptyCell[0]][emptyCell[1]] = 5;
+    }
+    else if(ballsOptionsArr[indxBallToPut] == 15){
+      board[emptyCell[0]][emptyCell[1]] = 15;  
+    }
+    else if (ballsOptionsArr[indxBallToPut] == 25){
+      board[emptyCell[0]][emptyCell[1]] = 25;
+    }
+    ballsOptionsArr.splice(indxBallToPut,1);
+
   }
+
+  emptyCell = findRandomEmptyCell(board);
+  shape.i = emptyCell[0];
+  shape.j = emptyCell[1];
+  board[ emptyCell[0]][ emptyCell[1]] = 2;
+  
   keysDown = {};
   addEventListener(
     "keydown",
@@ -1068,19 +1045,35 @@ function Draw() {
         context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
         context.fillStyle = "black"; //color
         context.fill();
-      } else if (board[i][j] == 1) {
-        context.beginPath();
-        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-        context.fillStyle = "black"; //color
-        context.fill();
-      } else if (board[i][j] == 4) {
+      }  else if (board[i][j] == 4) {
         context.beginPath();
         context.rect(center.x - 30, center.y - 30, 60, 60);
         context.fillStyle = "grey"; //color
         context.fill();
       }
+      else if (board[i][j] == 5) {
+        context.beginPath();
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+        context.fillStyle = balls_color_5; //color
+        context.fill();
+      }
+      else if (board[i][j] == 15) {
+        context.beginPath();
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+        context.fillStyle = balls_color_15; //color
+        context.fill();
+      }
+      else if (board[i][j] == 25) {
+        context.beginPath();
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+        context.fillStyle = balls_color_25; //color
+        context.fill();
+      }
+      else if(board[i][j] == "M") {
+        context.drawImage(monsterImg,center.x-30, center.y-30, 30, 30);
+     }
     }
-  }
+  } 
 }
 
 function UpdatePosition() {
@@ -1106,8 +1099,14 @@ function UpdatePosition() {
       shape.i++;
     }
   }
-  if (board[shape.i][shape.j] == 1) {
-    score++;
+  if (board[shape.i][shape.j] == 5) {
+    score += 5;
+  }
+  if (board[shape.i][shape.j] == 15) {
+    score += 15;
+  }
+  if (board[shape.i][shape.j] == 25) {
+    score += 25;
   }
   board[shape.i][shape.j] = 2;
   var currentTime = new Date();
