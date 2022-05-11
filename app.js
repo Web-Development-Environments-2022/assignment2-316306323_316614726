@@ -952,6 +952,7 @@ var monsterImg = new Image();
 monsterImg.src = "./resources/monster.png";
 
 function Start() {
+  gameStatus = "play";
   board = new Array();
   if(lives == 3){
     score = 0;
@@ -1037,18 +1038,17 @@ function Start() {
     },
     false
   );
-  intervalPac = setInterval(function(){
-    UpdatePosition();
+  intervalP = setInterval(function(){
     
+    UpdatePosition();
     Draw();
+    checkGameOver();
   }, 250);
-
-  intervalMon = setInterval(function(){
+  intervalM = setInterval(function(){
     UpdatePositionMonster();
-
   }, 1000);
- 
 }
+
 
 function findRandomEmptyCell(board) {
   var i = Math.floor(Math.random() * boardSize-1 + 1);
@@ -1127,35 +1127,50 @@ function Draw() {
     monsterCenter.x = monsters[k].i * 600/boardSize + 600/(boardSize*2);
     monsterCenter.y = monsters[k].j * 600/boardSize + 600/(boardSize*2);
     context.drawImage(monsterImg, monsterCenter.x-600/(boardSize*2), monsterCenter.y-600/(boardSize*2), 600/boardSize, 600/boardSize);
-    if(monsters[k].i == pacman.i && monsters[k].j == pacman.j){
-      lives--;
-      if(lives > 0){
-        Start();
-      }
-      else{
-        checkGameOver();
-      }
-      
-    }
   }
-  checkGameOver();
 }
 
 function checkGameOver(){
+
+  for(let k=0;k<monsters.length;k++){
+    if(monsters[k].i == pacman.i && monsters[k].j == pacman.j){
+      lives--;
+      score -= 10;
+      if(lives > 0){ // need to respawn monsters and pacman
+        board[pacman.i][pacman.j] = 0;
+        emptyCell = findRandomEmptyCell(board);
+        pacman.i = emptyCell[0];
+        pacman.j = emptyCell[1];
+        board[emptyCell[0]][emptyCell[1]] = 2;
+        monsters[0].i = 0;
+        monsters[0].j = 0;
+        monsters[1].i = 0;
+        monsters[1].j = boardSize-1;
+        monsters[2].i = boardSize-1;
+        monsters[2].j = 0;
+        monsters[3].i = boardSize-1;
+        monsters[3].j = boardSize-1;
+        break;
+      }
+    }
+  }
+  
   let p_loseGame = document.getElementById("loseMsg");
   if(gameTime <= time_elapsed){
     if(score >= 100){
       gameStatus = "win";
-      window.clearInterval(intervalPac);
-      window.clearInterval(intervalMon);
+      window.clearInterval(intervalP);
+      window.clearInterval(intervalM);
+  
       changePage(div_game_login, div_winnerPage, null, null, "game-login");
 
     }
     else{
       gameStatus = "lose";
       p_loseGame.innerHTML = "You are better than " + score + " points!";
-      window.clearInterval(intervalPac);
-      window.clearInterval(intervalMon);
+    
+      window.clearInterval(intervalP);
+      window.clearInterval(intervalM);
       changePage(div_game_login, div_looserPage, null, null, "game-login");
 
     }
@@ -1163,8 +1178,9 @@ function checkGameOver(){
   else if(lives <= 0){
     gameStatus = "lose";
     p_loseGame.innerHTML = "Loser!";
-    window.clearInterval(intervalPac);
-    window.clearInterval(intervalMon);
+    
+    window.clearInterval(intervalP);
+    window.clearInterval(intervalM);
     changePage(div_game_login, div_looserPage, null, null, "game-login");
 
   }
@@ -1368,7 +1384,6 @@ function UpdatePosition() {
   board[pacman.i][pacman.j] = 2;
   var currentTime = new Date();
   time_elapsed = (currentTime - start_time) / 1000;
-
 }
 
 function saveResultAndRestartGame(){
