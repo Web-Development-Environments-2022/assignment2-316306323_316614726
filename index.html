@@ -179,22 +179,22 @@
             <h5>Please choose your move buttons:</h5>
             <!-- UP -->
             <div class="btn-choose-container">
-              <label for="up-key">UP (add sign)</label>
+              <label for="up-key">UP</label>
               <input id="choose_button_up" type="button" value="ArrowUp" />
             </div>
             <!-- DOWN -->
             <div class="btn-choose-container">
-              <label for="down-key">DOWN (add sign)</label>
+              <label for="down-key">DOWN</label>
               <input id="choose_button_down" type="button" value="ArrowDown" />
             </div>
             <!-- LEFT -->
             <div class="btn-choose-container">
-              <label for="left-key">LEFT (add sign)</label>
+              <label for="left-key">LEFT</label>
               <input id="choose_button_left" type="button" value="ArrowLeft" />
             </div>
             <!-- RIGHT -->
             <div class="btn-choose-container">
-              <label for="right-key">RIGHT (add sign)</label>
+              <label for="right-key">RIGHT</label>
               <input id="choose_button_right" type="button" value="ArrowRight" />
             </div>
             <h5 id="arrows_settings_error_message" style="color: red"></h5>
@@ -203,8 +203,8 @@
             <!-- Amount -->
             <div class="btn-choose-container">
               <label for="balls-amount">Amount</label>
-              <input type="range" min="50" max="90" value="50" class="slider" id="ballsAmountRange">
-              <p id="display-balls-amount"></p>
+              <input type="range" min="50" max="90" value="50" class="slider" id="ballsAmountRange" >
+              <p id="display-balls-amount" style="display: inline;"></p>
             </div>
             <!-- Color 5 point -->
             <div class="btn-choose-container">
@@ -234,7 +234,7 @@
             <div class="btn-choose-container">
               <label for="monsters-amount">Monsters amount:</label>
               <input type="range" min="1" max="4" value="1" class="slider" id="monstersAmountRange">
-              <p id="display-monsters-amount"></p>
+              <p id="display-monsters-amount" style="display: inline;"></p>
             </div>
 
             <h5>Random:</h5>
@@ -269,8 +269,25 @@
           <label for="lblTime">TIME:</label>
           <input id="lblTime" type="text" /> -->
         </div>
+        <div id="lives">
+          <label for="lblLives">Lives:</label>
+          <img id="life1" src="resources/heart.jpg" style="display:inline; width: 30px;">
+          <img id="life2" src="resources/heart.jpg" style="display:inline; width: 30px;">
+          <img id="life3" src="resources/heart.jpg" style="display:inline; width: 30px;">
+        </div>
         <canvas id="canvas" height="600" width="600"></canvas>
       </div>
+
+      <div id="gameWinner" class="hide">
+        <input type="button" value="Restart Game" onclick="saveResultAndRestartGame()">
+        <img id="win-game" src="">
+      </div>
+      <div id="gameOver" class="hide">
+        <input type="button" value="Restart Game" onclick="saveResultAndRestartGame()">
+        <img id="lose-game" src="">
+        <p id="loseMsg"></p>
+      </div>
+      
 
       <div id="game_div" class="hide">
         <h1>If you want to play Pacman please login first!</h1>
