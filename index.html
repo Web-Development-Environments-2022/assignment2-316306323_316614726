@@ -14,8 +14,13 @@
       <a class="active" id="welcome_a">Welcome</a>
       <a id="settings_a">Settings</a>
       <a id="top10_a">Top 10!</a>
-      <a id="game_a">Play Pack Man!</a>
       <a id="about_a">About</a>
+      <a
+        id="game_a"
+        class="inactiveLink"
+        style="background-color: rgb(165, 162, 162)"
+        >Play Pack Man!</a
+      >
     </nav>
 
     <!-- Content-->
@@ -195,7 +200,11 @@
             <!-- RIGHT -->
             <div class="btn-choose-container">
               <label for="right-key">RIGHT</label>
-              <input id="choose_button_right" type="button" value="ArrowRight" />
+              <input
+                id="choose_button_right"
+                type="button"
+                value="ArrowRight"
+              />
             </div>
             <h5 id="arrows_settings_error_message" style="color: red"></h5>
 
@@ -203,38 +212,73 @@
             <!-- Amount -->
             <div class="btn-choose-container">
               <label for="balls-amount">Amount</label>
-              <input type="range" min="50" max="90" value="50" class="slider" id="ballsAmountRange" >
-              <p id="display-balls-amount" style="display: inline;"></p>
+              <input
+                type="range"
+                min="50"
+                max="90"
+                value="50"
+                class="slider"
+                id="ballsAmountRange"
+              />
+              <p id="display-balls-amount" style="display: inline"></p>
             </div>
             <!-- Color 5 point -->
             <div class="btn-choose-container">
-              <label for="5-point-color">Choose color for 5 points balls: </label>
-              <input type="color" id="5colorpicker" value="#ff0000" style="width:5%;">
+              <label for="5-point-color"
+                >Choose color for 5 points balls:
+              </label>
+              <input
+                type="color"
+                id="5colorpicker"
+                value="#ff0000"
+                style="width: 5%"
+              />
             </div>
             <!-- Color 15 point -->
             <div class="btn-choose-container">
-              <label for="15-point-color">Choose color for 15 points balls: </label>
-              <input type="color" id="15colorpicker" value="#ff0000" style="width:5%;">
+              <label for="15-point-color"
+                >Choose color for 15 points balls:
+              </label>
+              <input
+                type="color"
+                id="15colorpicker"
+                value="#ff0000"
+                style="width: 5%"
+              />
             </div>
-             <!-- Color 25 point -->
-             <div class="btn-choose-container">
-              <label for="25-point-color">Choose color for 25 points balls: </label>
-              <input type="color" id="25colorpicker" value="#ff0000" style="width:5%;">
+            <!-- Color 25 point -->
+            <div class="btn-choose-container">
+              <label for="25-point-color"
+                >Choose color for 25 points balls:
+              </label>
+              <input
+                type="color"
+                id="25colorpicker"
+                value="#ff0000"
+                style="width: 5%"
+              />
             </div>
             <h5 id="balls_settings_error_message" style="color: red"></h5>
 
             <h5>Time:</h5>
             <div class="btn-choose-container">
               <label for="time-amount">Game timer (sec):</label>
-              <input id="game_timer_picker" value="60">
+              <input id="game_timer_picker" value="60" />
               <h5 id="time_settings_error_message" style="color: red"></h5>
             </div>
 
             <h5>Monsters:</h5>
             <div class="btn-choose-container">
               <label for="monsters-amount">Monsters amount:</label>
-              <input type="range" min="1" max="4" value="1" class="slider" id="monstersAmountRange">
-              <p id="display-monsters-amount" style="display: inline;"></p>
+              <input
+                type="range"
+                min="1"
+                max="4"
+                value="1"
+                class="slider"
+                id="monstersAmountRange"
+              />
+              <p id="display-monsters-amount" style="display: inline"></p>
             </div>
 
             <h5>Random:</h5>
@@ -260,34 +304,148 @@
       </div>
 
       <div id="game_div-logged-in" class="hide">
-        <h1>Let's Play Pacman</h1>
-        <div id="score">
-          <label for="lblScore">SCORE:</label>
-          <input id="lblScore" type="text" />
-        </div>
-        <div id="time">
-          <label for="lblTime">TIME:</label>
-          <input id="lblTime" type="text" /> -->
-        </div>
-        <div id="lives">
-          <label for="lblLives">Lives:</label>
-          <img id="life1" src="resources/heart.jpg" style="display:inline; width: 30px;">
-          <img id="life2" src="resources/heart.jpg" style="display:inline; width: 30px;">
-          <img id="life3" src="resources/heart.jpg" style="display:inline; width: 30px;">
+        <div class="gameHeaders">
+          <h2 id="gamePlayerMsg"></h2>
+          <div id="score">
+            <label for="lblScore">SCORE:</label>
+            <input id="lblScore" type="text" />
+          </div>
+          <div id="time">
+            <label for="lblTime">TIME:</label>
+            <input id="lblTime" type="text" />
+          </div>
+          <div id="lives_div">
+            <label>Lives:</label>
+          </div>
+        </div></br>
+        <div class="gameSettings-container">
+          <!-- UP -->
+          <div class="btn-choose-container">
+            <label for="up-key">Move UP</label>
+            <input
+              id="gameSettings-choose_button_up"
+              type="button"
+              value="ArrowUp"
+              style="pointer-events: none;"
+            />
+          </div>
+          <!-- DOWN -->
+          <div class="btn-choose-container">
+            <label for="down-key">Move DOWN</label>
+            <input
+              id="gameSettings-choose_button_down"
+              type="button"
+              value="ArrowDown"
+              style="pointer-events: none;"
+            />
+          </div>
+          <!-- LEFT -->
+          <div class="btn-choose-container">
+            <label for="left-key">Move LEFT</label>
+            <input
+              id="gameSettings-choose_button_left"
+              type="button"
+              value="ArrowLeft"
+              style="pointer-events: none;"
+            />
+          </div>
+          <!-- RIGHT -->
+          <div class="btn-choose-container">
+            <label for="right-key">Move RIGHT</label>
+            <input
+              id="gameSettings-choose_button_right"
+              type="button"
+              value="ArrowRight"
+              style="pointer-events: none;"
+            />
+          </div>
+
+          <!-- Amount -->
+          <div class="btn-choose-container">
+            <label for="balls-amount">Total Balls Amount:</label>
+            <input
+              type="range"
+              min="50"
+              max="90"
+              value="50"
+              class="slider"
+              id="gameSettings-ballsAmountRange"
+              style="pointer-events: none;"
+            />
+            <p id="gameSettings-balls-amount" style="display: inline"></p>
+          </div>
+          <!-- Color 5 point -->
+          <div class="btn-choose-container">
+            <label for="5-point-color">5 Points ball color: </label>
+            <input
+              type="color"
+              id="gameSettings-5colorpicker"
+              value="#ff0000"
+              style="width: 20%; pointer-events: none;"
+            />
+          </div>
+          <!-- Color 15 point -->
+          <div class="btn-choose-container">
+            <label for="15-point-color">15 Points ball color: </label>
+            <input
+              type="color"
+              id="gameSettings-15colorpicker"
+              value="#ff0000"
+              style="width: 20%; pointer-events: none;"
+              readonly
+            />
+          </div>
+          <!-- Color 25 point -->
+          <div class="btn-choose-container">
+            <label for="25-point-color">25 Points ball color: </label>
+            <input
+              type="color"
+              id="gameSettings-25colorpicker"
+              value="#ff0000"
+              style="width: 20%; pointer-events: none;"
+              readonly
+            />
+          </div>
+
+          <div class="btn-choose-container">
+            <label for="time-amount">Game time:</label>
+            <input id="gameSettings-time" value="60" style="pointer-events: none;" />
+          </div>
+
+          <div class="btn-choose-container">
+            <label for="gameSettings-monsters-count">Monsters amount:</label>
+            <input
+              type="range"
+              min="1"
+              max="4"
+              value="1"
+              class="slider"
+              id="gameSettings-monsters"
+              style="pointer-events: none;"
+            />
+            <p id="gameSettings-monsters-count" style="display: inline"></p>
+          </div>
         </div>
         <canvas id="canvas" height="600" width="600"></canvas>
       </div>
 
       <div id="gameWinner" class="hide">
-        <input type="button" value="Restart Game" onclick="saveResultAndRestartGame()">
-        <img id="win-game" src="">
+        <input
+          type="button"
+          value="Restart Game"
+          onclick="saveResultAndRestartGame()"
+        />
+        <img id="win-game" src="" />
       </div>
       <div id="gameOver" class="hide">
-        <input type="button" value="Restart Game" onclick="saveResultAndRestartGame()">
-        <img id="lose-game" src="">
+        <input
+          type="button"
+          value="Restart Game"
+          onclick="saveResultAndRestartGame()"
+        />
+        <img id="lose-game" src="" />
         <p id="loseMsg"></p>
       </div>
-      
 
       <div id="game_div" class="hide">
         <h1>If you want to play Pacman please login first!</h1>
