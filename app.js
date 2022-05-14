@@ -66,8 +66,8 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
-var intervalPac;
-var intervalMon;
+var intervalP;
+var intervalM;
 var monsters = [];
 var boardSize = 20;
 var numOfBalls;
@@ -83,6 +83,7 @@ var lives = 5;
 var gameStatus = "play";
 
 /* ////////////////////////////////  NAV PAGES ////////////////////////////////// */
+
 
 function changePage(
   from_page,
@@ -102,8 +103,7 @@ function changePage(
   }
 
   if (from_page === div_game_login) {
-    window.clearInterval(intervalP);
-    window.clearInterval(intervalM);
+    clearAllIntervals();
   }
 
   currPage = caseName;
@@ -980,6 +980,14 @@ pacmanImgs[2].src = "./resources/PacManRight.png";
 pacmanImgs[3].src = "./resources/PacManDown.png";
 pacman.direction = 0;
 
+var clockImg = new Image();
+clockImg.src = "./resources/clock.jpg"
+var clock = new Object();
+clock.addTime = 30; 
+clock.i = 0; // just to set fields first
+clock.j = 0;
+clock.wasEaten = false;
+
 function showGameSettings() {
   document.getElementById(
     "gamePlayerMsg"
@@ -1140,9 +1148,16 @@ function Start() {
     Draw();
     checkGameOver();
   }, 150);
+  
   intervalM = setInterval(function () {
     UpdatePositionMonster();
   }, 650);
+
+  intervalClock = setInterval(function () {
+    if(!clock.wasEaten){
+      UpdatePositionClock();
+    }
+  }, 5000);
 }
 
 function findRandomEmptyCell(board) {
@@ -1253,7 +1268,6 @@ function Draw() {
   }
 
   if(!specialMonster.wasEaten){
-    console.log("here")
     let specialMonsterCenter = new Object();
     specialMonsterCenter.x = (specialMonster.i * 600) / boardSize + 600 / (boardSize * 2);
     specialMonsterCenter.y = (specialMonster.j * 600) / boardSize + 600 / (boardSize * 2);
@@ -1266,7 +1280,21 @@ function Draw() {
       600 / boardSize
     );
   }
-  
+
+  if(!clock.wasEaten){
+    let speciaClockCenter = new Object();
+    speciaClockCenter.x = (clock.i * 600) / boardSize + 600 / (boardSize * 2);
+    speciaClockCenter.y = (clock.j * 600) / boardSize + 600 / (boardSize * 2);
+    
+    context.drawImage(
+      clockImg,
+      speciaClockCenter.x - 600 / (boardSize * 2),
+      speciaClockCenter.y - 600 / (boardSize * 2),
+      600 / boardSize,
+      600 / boardSize
+    )
+  }
+
 }
 
 function checkGameOver() {
@@ -1306,24 +1334,22 @@ function checkGameOver() {
   if (gameTime <= time_elapsed) {
     if (score >= 100) {
       gameStatus = "win";
-      window.clearInterval(intervalP);
-      window.clearInterval(intervalM);
+      clearAllIntervals();
 
       changePage(div_game_login, div_winnerPage, null, null, "game-login");
     } else {
       gameStatus = "lose";
       p_loseGame.innerHTML = "You are better than " + score + " points!";
 
-      window.clearInterval(intervalP);
-      window.clearInterval(intervalM);
+      clearAllIntervals();
+
       changePage(div_game_login, div_looserPage, null, null, "game-login");
     }
   } else if (lives <= 0) {
     gameStatus = "lose";
     p_loseGame.innerHTML = "Loser!";
 
-    window.clearInterval(intervalP);
-    window.clearInterval(intervalM);
+    clearAllIntervals();
     changePage(div_game_login, div_looserPage, null, null, "game-login");
   }
 }
@@ -1524,6 +1550,12 @@ function UpdatePositionMonster() {
     setMonsterMove(monI, monJ, difI, difJ, monsters, k);
   }
 }
+
+function UpdatePositionClock(){
+  cell = findRandomEmptyCell(board);
+  clock.i = cell[0];
+  clock.j = cell[1];
+}
 function UpdatePosition() {
   board[pacman.i][pacman.j] = 0;
   var x = GetKeyPressed();
@@ -1564,6 +1596,12 @@ function UpdatePosition() {
     score += specialMonster.points;
     specialMonster.wasEaten = true;
   }
+
+  if(!clock.wasEaten && pacman.i == clock.i && pacman.j == clock.j){
+    gameTime += clock.addTime;
+    clock.wasEaten = true;
+  }
+
   board[pacman.i][pacman.j] = 2;
   var currentTime = new Date();
   time_elapsed = (currentTime - start_time) / 1000;
@@ -1591,4 +1629,10 @@ function saveResultAndRestartGame() {
       );
       break;
   }
+}
+
+function clearAllIntervals(){
+  window.clearInterval(intervalP);
+  window.clearInterval(intervalM);
+  window.clearInterval(intervalClock);
 }
