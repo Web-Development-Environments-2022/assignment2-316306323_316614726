@@ -988,6 +988,17 @@ clock.i = 0; // just to set fields first
 clock.j = 0;
 clock.wasEaten = false;
 
+var extraLifeImg = new Image();
+extraLifeImg.src = "./resources/heart.jpg";
+var extraLife = new Object();
+extraLife.i = boardSize-1;
+extraLife.j = boardSize-1;
+extraLife.wasEaten = false;
+
+var backgroundMusic = document.createElement("audio");
+backgroundMusic.src = "./resources/music.mp3";
+backgroundMusic.loop = true
+
 function showGameSettings() {
   document.getElementById(
     "gamePlayerMsg"
@@ -1037,6 +1048,8 @@ function showGameSettings() {
 
 function Start() {
   gameStatus = "play";
+
+  backgroundMusic.play();
   score = 0;
   lives = 5;
   let htmlLive = `
@@ -1153,10 +1166,8 @@ function Start() {
     UpdatePositionMonster();
   }, 650);
 
-  intervalClock = setInterval(function () {
-    if(!clock.wasEaten){
-      UpdatePositionClock();
-    }
+  intervalFeatures = setInterval(function () {
+    UpdatePositionFeatures();
   }, 5000);
 }
 
@@ -1295,6 +1306,20 @@ function Draw() {
     )
   }
 
+  if(!extraLife.wasEaten){
+    let extraLifeCenter = new Object();
+    extraLifeCenter.x = (extraLife.i * 600) / boardSize + 600 / (boardSize * 2);
+    extraLifeCenter.y = (extraLife.j * 600) / boardSize + 600 / (boardSize * 2);
+    
+    context.drawImage(
+      extraLifeImg,
+      extraLifeCenter.x - 600 / (boardSize * 2),
+      extraLifeCenter.y - 600 / (boardSize * 2),
+      600 / boardSize,
+      600 / boardSize
+    )
+  }
+
 }
 
 function checkGameOver() {
@@ -1335,7 +1360,7 @@ function checkGameOver() {
     if (score >= 100) {
       gameStatus = "win";
       clearAllIntervals();
-
+     
       changePage(div_game_login, div_winnerPage, null, null, "game-login");
     } else {
       gameStatus = "lose";
@@ -1551,10 +1576,15 @@ function UpdatePositionMonster() {
   }
 }
 
-function UpdatePositionClock(){
-  cell = findRandomEmptyCell(board);
-  clock.i = cell[0];
-  clock.j = cell[1];
+function UpdatePositionFeatures(){
+  if(!clock.wasEaten){
+    let cell = findRandomEmptyCell(board);
+    clock.i = cell[0];
+    clock.j = cell[1];
+  }
+  let cell = findRandomEmptyCell(board);
+  extraLife.i = cell[0];
+  extraLife.j = cell[1];
 }
 function UpdatePosition() {
   board[pacman.i][pacman.j] = 0;
@@ -1602,6 +1632,17 @@ function UpdatePosition() {
     clock.wasEaten = true;
   }
 
+  if(!extraLife.wasEaten && pacman.i == extraLife.i && pacman.j == extraLife.j){
+    lives += 1;
+    extraLife.wasEaten = true;
+    let htmlLive = `
+    <img src="resources/heart.jpg" style="display: inline; width: 30px" />
+    `;
+
+    $("#lives_div").append(htmlLive);
+  }
+  
+
   board[pacman.i][pacman.j] = 2;
   var currentTime = new Date();
   time_elapsed = (currentTime - start_time) / 1000;
@@ -1634,5 +1675,6 @@ function saveResultAndRestartGame() {
 function clearAllIntervals(){
   window.clearInterval(intervalP);
   window.clearInterval(intervalM);
-  window.clearInterval(intervalClock);
+  window.clearInterval(intervalFeatures);
+  backgroundMusic.pause();
 }
