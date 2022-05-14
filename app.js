@@ -963,6 +963,16 @@ for (let i = 0; i < monsterImgs.length; i++) {
   monsterImgs[i].src = "./resources/monster-left.png";
 }
 
+var specialMonsterImg = [new Image(), new Image()];
+specialMonsterImg[0].src = "./resources/special-monster-left.jpg"
+specialMonsterImg[1].src = "./resources/special-monster-right.jpg"
+var specialMonster = new Object();
+specialMonster.i = boardSize/2;
+specialMonster.j = boardSize/2;
+specialMonster.points = 50;
+specialMonster.wasEaten = false;
+specialMonster.direction = 0;
+
 var pacmanImgs = [new Image(), new Image(), new Image(), new Image()]; // 0-left, 1-up, 2-right, 3-down
 pacmanImgs[0].src = "./resources/PacManLeft.png";
 pacmanImgs[1].src = "./resources/PacManUp.png";
@@ -1124,6 +1134,9 @@ function Start() {
   );
   intervalP = setInterval(function () {
     UpdatePosition();
+    if(!specialMonster.wasEaten){
+      UpdatePositionSpecialMonster();
+    }
     Draw();
     checkGameOver();
   }, 150);
@@ -1238,6 +1251,22 @@ function Draw() {
       600 / boardSize
     );
   }
+
+  if(!specialMonster.wasEaten){
+    console.log("here")
+    let specialMonsterCenter = new Object();
+    specialMonsterCenter.x = (specialMonster.i * 600) / boardSize + 600 / (boardSize * 2);
+    specialMonsterCenter.y = (specialMonster.j * 600) / boardSize + 600 / (boardSize * 2);
+  
+    context.drawImage(
+      specialMonsterImg[specialMonster.direction],
+      specialMonsterCenter.x - 600 / (boardSize * 2),
+      specialMonsterCenter.y - 600 / (boardSize * 2),
+      600 / boardSize,
+      600 / boardSize
+    );
+  }
+  
 }
 
 function checkGameOver() {
@@ -1467,6 +1496,22 @@ function setMonsterMove(monI, monJ, difI, difJ, monsters, k) {
     }
   }
 }
+function UpdatePositionSpecialMonster() {
+  possMoves = getPossibleMoves(specialMonster.i, specialMonster.j);
+  let step = Math.floor(Math.random() * possMoves.length);
+  while(possMoves[step] == 0){
+    step = Math.floor(Math.random() * possMoves.length);
+  }
+  if(step == 2){
+    specialMonster.direction = 0;
+  }
+  else if(step == 3){
+    specialMonster.direction = 1;
+  }
+  specialMonster.i = possMoves[step][0];
+  specialMonster.j = possMoves[step][1];
+}
+
 function UpdatePositionMonster() {
   let pacI = pacman.i;
   let pacJ = pacman.j;
@@ -1514,6 +1559,10 @@ function UpdatePosition() {
   }
   if (board[pacman.i][pacman.j] == 25) {
     score += 25;
+  }
+  if(!specialMonster.wasEaten && pacman.i == specialMonster.i && pacman.j == specialMonster.j){
+    score += specialMonster.points;
+    specialMonster.wasEaten = true;
   }
   board[pacman.i][pacman.j] = 2;
   var currentTime = new Date();
