@@ -8,7 +8,8 @@
   <body>
     <header>
       <img src="/resources/Logo.png" alt="Logo!" />
-      <h1>The Real Pacman Game!</h1>
+      <h1>The Real Pacman Game!</h1><br>
+      <h4>Creators: Ori Salomon & Dor Levi</h4>
     </header>
     <nav class="topnav">
       <a class="active" id="welcome_a">Welcome</a>
@@ -294,7 +295,27 @@
       </div>
 
       <div class="hide" id="top10_div">
-        <h1>Top 10 Games Played:</h1>
+        <!-- <h1>Top 10 Games Played:</h1>
+        <TABLE id="dataTable" width="350px" border="1">
+          <TR>
+            <TD> Username </TD>
+            <TD> Score </TD>
+          </TR>
+        </TABLE> -->
+        <table id="dataTable">
+          <thead>
+              <tr><th>Top 10 Games Played:</th></tr>
+              <tr><th>Username</th><th>Score</th></tr>
+          </thead>
+          <tbody style="text-align:center;">
+              <tr><td>Row 1</td><td>Score 1</td></tr>
+              <tr><td>Row 2</td><td>Score 2</td></tr>
+              <tr><td>Row 3</td><td>Score 3</td></tr>
+          </tbody>
+          <tfoot  style="text-align:center;">
+              <tr><td>If you are not listed first play harder</td></tr>
+          </tfoot>
+      </table>
       </div>
 
       <div class="hide" id="about_div"></div>

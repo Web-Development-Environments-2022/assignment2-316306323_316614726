@@ -16,7 +16,8 @@ header img {
   background: #555;
 }
 
-header h1 {
+header h1,
+h4 {
   position: relative;
   text-align: center;
   top: 25%;
