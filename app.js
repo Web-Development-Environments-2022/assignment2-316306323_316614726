@@ -323,7 +323,19 @@ anchor_top10.addEventListener("click", function () {
 
     case "game-login":
       setResults();
-      changePage(div_game_login, div_top10, anchor_game, anchor_top10, "top10");
+      let divFrom;
+      switch (gameStatus) {
+        case "win":
+          divFrom = div_winnerPage;
+          break;
+        case "lose":
+          divFrom = div_looserPage;
+          break;
+        case "play":
+          divFrom = div_game_login;
+          break;
+      }
+      changePage(divFrom, div_top10, anchor_game, anchor_top10, "top10");
       break;
 
     case "about":
@@ -833,8 +845,7 @@ var btn_random = document.getElementById("randomPicker");
 btn_random.onclick = function () {
   // set num of balls
   ballsSlider.value = Math.floor(Math.random() * (90 - 50)) + 50;
-  numOfBalls = parseInt(ballsSlider.value);
-  ballsAmountDisplayer.innerHTML = ballsSlider.value;
+  setBallsAmount();
 
   // set num of monsters
   monstersSlider.value = Math.floor(Math.random() * (4 - 1)) + 1;
@@ -1371,14 +1382,14 @@ function checkGameOver() {
     if (score >= 100) {
       gameStatus = "win";
       clearAllIntervals();
-
+      storeResult();
       changePage(div_game_login, div_winnerPage, null, null, "game-login");
     } else {
       gameStatus = "lose";
       p_loseGame.innerHTML = "You are better than " + score + " points!";
 
       clearAllIntervals();
-
+      storeResult();
       changePage(div_game_login, div_looserPage, null, null, "game-login");
     }
   } else if (lives <= 0) {
@@ -1386,6 +1397,7 @@ function checkGameOver() {
     p_loseGame.innerHTML = "Loser!";
 
     clearAllIntervals();
+    storeResult();
     changePage(div_game_login, div_looserPage, null, null, "game-login");
   }
 }
@@ -1699,26 +1711,23 @@ function clearAllIntervals() {
   backgroundMusic.pause();
 }
 
+function storeResult() {
+  results.push(new Result(currUser.username, score));
+  results.sort((a, b) => b.score - a.score);
+  results = results.splice(0, 10);
+}
+
 function setResults() {
-  let table = document.getElementById("dataTable");
-  let tbodyRowCount = table.tBodies[0].rows.length; // 3
-  console.log(tbodyRowCount);
+  $("#bodyTable").children().remove();
+  let tableBody = document.getElementById("bodyTable");
 
-  // pesudo code for insert:
-  /*
-  for(int i=tbodyRowCount; i<results.length; i++){ results.length > tbodyRowCount
-    var rowCount = table.rows.length;
-			var row = table.insertRow(rowCount);
+  for (let i = 0; i < results.length; i++) {
+    let row = tableBody.insertRow(-1);
 
-			var cell1 = row.insertCell(0);
-			var element1 = document.createElement("p");
-			element1.innerText= results[i].username;
-			cell1.appendChild(element1);
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
 
-			var cell2 = row.insertCell(1);
-			var element2 = document.createElement("p");
-			element2.innerText= results[i].score;
-			cell2.appendChild(element2);
+    cell1.innerHTML = results[i].username;
+    cell2.innerHTML = results[i].score;
   }
-  */
 }

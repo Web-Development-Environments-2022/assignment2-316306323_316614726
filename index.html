@@ -8,8 +8,7 @@
   <body>
     <header>
       <img src="/resources/Logo.png" alt="Logo!" />
-      <h1>The Real Pacman Game!</h1><br>
-      <h4>Creators: Ori Salomon & Dor Levi</h4>
+      <h1 style="text-align: left;margin-left: 350px;">The Real Pacman Game!</h1><h5 style="text-align: center;margin-top: 20px;">Creators: Ori Salomon & Dor Levi</h5>
     </header>
     <nav class="topnav">
       <a class="active" id="welcome_a">Welcome</a>
@@ -58,7 +57,6 @@
       <div class="hide" id="signup_div">
         <div class="container">
           <form>
-            <!-- action="action_page.php" -->
             <label for="username">User Name</label>
             <input
               type="text"
@@ -307,10 +305,10 @@
               <tr><th>Top 10 Games Played:</th></tr>
               <tr><th>Username</th><th>Score</th></tr>
           </thead>
-          <tbody style="text-align:center;">
-              <tr><td>Row 1</td><td>Score 1</td></tr>
-              <tr><td>Row 2</td><td>Score 2</td></tr>
-              <tr><td>Row 3</td><td>Score 3</td></tr>
+          <tbody id="bodyTable" style="text-align:center;">
+               <tr><td>Row 1</td><td>Score 1</td></tr>
+              <!--<tr><td>Row 2</td><td>Score 2</td></tr>
+              <tr><td>Row 3</td><td>Score 3</td></tr> -->
           </tbody>
           <tfoot  style="text-align:center;">
               <tr><td>If you are not listed first play harder</td></tr>
