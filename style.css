@@ -191,6 +191,7 @@ textarea {
 }
 
 label,
+p,
 input[type="date"],
 input[type="password"] {
   color: #333232;
