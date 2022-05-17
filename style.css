@@ -196,6 +196,18 @@ input[type="password"] {
   color: #333232;
 }
 
+#settings_div-logged-in input,
+button {
+  color: #333232;
+}
+#settings_div-logged-in label {
+  text-align: left;
+}
+
+#gameOver input {
+  color: #333232;
+}
+
 /* Style the submit button with a specific background color etc */
 input[type="submit"] {
   background-color: #50aef1;
@@ -225,10 +237,10 @@ input[type="submit"]:hover {
 
 #canvas {
   outline: black 5px solid;
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: auto;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: center; */
 }
 
 .gameSettings-container {
@@ -236,14 +248,16 @@ input[type="submit"]:hover {
   background-color: #f2f2f2;
   padding: 20px;
   width: 350px;
-  display: inline-block;
-  vertical-align: middle;
+  /* display: inline-block;
+  vertical-align: middle; */
+}
+#game_div-logged-in table {
+  padding-left: 0%;
 }
 
 .gameHeaders {
-  display: block;
   width: 500px;
-  margin-left: 30px;
+  /* margin-left: 30px; */
 }
 
 /* ////////////////////////////////////////// FOOTER ////////////////////////////////////////////// */
