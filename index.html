@@ -52,7 +52,7 @@
           alt="Logo!"
           style="height: 150px"
         /><br />
-        <h1 id="logged_in_welcome"></h1>
+        <h1 id="logged_in_welcome" style="color:black"></h1>
         <button id="logout-btn" class="btn-welcome-in">
           <!--onclick="moveSignIn()" -->
           Logout
@@ -298,13 +298,6 @@
       </div>
 
       <div class="hide" id="top10_div">
-        <!-- <h1>Top 10 Games Played:</h1>
-        <TABLE id="dataTable" width="350px" border="1">
-          <TR>
-            <TD> Username </TD>
-            <TD> Score </TD>
-          </TR>
-        </TABLE> -->
         <table id="dataTable">
           <thead>
             <tr>
@@ -316,12 +309,6 @@
             </tr>
           </thead>
           <tbody id="bodyTable" style="text-align: center">
-            <tr>
-              <td>Row 1</td>
-              <td>Score 1</td>
-            </tr>
-            <!--<tr><td>Row 2</td><td>Score 2</td></tr>
-              <tr><td>Row 3</td><td>Score 3</td></tr> -->
           </tbody>
           <tfoot style="text-align: center">
             <tr>
@@ -335,19 +322,19 @@
         <button
           id="close"
           onclick="CloseDialog()"
-          style="height: 40px; width: 25px; margin-right: 90%"
+          style="height: 40px; width: 25px; margin-right: 40%;"
         >
           X
         </button>
         <br />
         <p textalign="center">
-          <b>This website belongs to Ori Salomon and Dor Levi</b>
-          <br />
-          We used jQuery to validate the register form inputs.
-          <br />
-          We had difficulty transferring variables and data between the
-          Javascript and the HTML pages <br />
-          and also design all the components as we want to.
+          Hello!!! We are Ori Salomon and Dor Levi, welcome to our website!<br>
+          We really enjoyed making this project.<br>
+          Although both of us have some previous experience with JS, it was not as simple as we thought.<br>
+          We think the main challenge is to make everything work together - JS, HTML and CSS, while maintaining simplisity.<br>
+          We used jquery syntax to catch elements and check/change their attributes. <br>
+          A simple example to our use of jquery is the sign-up page, where we used jquery (and regex) to validate the signUp form fields.<br>
+          There was no use of any template.
         </p>
       </dialog>
 
@@ -501,10 +488,12 @@
       </div>
 
       <div id="gameWinner" class="hide">
+        <img src="./resources/winner.png">
         <input
           type="button"
           value="Restart Game"
           onclick="saveResultAndRestartGame()"
+          style="color: black"
         />
         <img id="win-game" src="" />
       </div>
@@ -513,8 +502,9 @@
           type="button"
           value="Restart Game"
           onclick="saveResultAndRestartGame()"
+          style="color: black"
         />
-        <img id="lose-game" src="" />
+        <img id="lose-game" src="./resources/looser.png"/>
         <p id="loseMsg"></p>
       </div>
 

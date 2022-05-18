@@ -65,8 +65,20 @@ h5 {
   display: none;
 }
 
+#login_div{
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+#top10_div{
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
 #welcome {
   text-align: center;
+  padding-left: 30%;
+  padding-right: 30%;
 }
 
 #content {
@@ -179,6 +191,12 @@ h5 {
 
 /* /////////////////////////////////////////// SIGN UP /////////////////////////////////////////////
 /* Style inputs with type="text", select elements and textareas */
+
+#signup_div{
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
 input[type="text"],
 select,
 textarea {
@@ -262,6 +280,11 @@ input[type="submit"]:hover {
   vertical-align: middle; */
   margin-left: 0;
   /* margin-right: 30%; */
+}
+
+#gameSettings-container  input,
+button {
+  color: #333232;
 }
 
 #gameHeaders {
