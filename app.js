@@ -1104,7 +1104,7 @@ function showGameSettings() {
 function Start() {
   gameStatus = "play";
   // reset if "play again" //
-  specialMonster.wasEaten = false; 
+  specialMonster.wasEaten = false;
   numOfBalls = numOfBalls_5 + numOfBalls_15 + numOfBalls_25;
   backgroundMusic.play();
   score = 0;
