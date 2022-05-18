@@ -141,8 +141,20 @@ anchor_welcome.addEventListener("click", function () {
       break;
 
     case "game-login":
+      let divFrom;
+      switch (gameStatus) {
+        case "win":
+          divFrom = div_winnerPage;
+          break;
+        case "lose":
+          divFrom = div_looserPage;
+          break;
+        case "play":
+          divFrom = div_game_login;
+          break;
+      }
       changePage(
-        div_game_login,
+        divFrom,
         div_welcome_login,
         anchor_game,
         anchor_welcome,
@@ -223,8 +235,20 @@ anchor_settings.addEventListener("click", function () {
       break;
 
     case "game-login":
+      let divFrom;
+      switch (gameStatus) {
+        case "win":
+          divFrom = div_winnerPage;
+          break;
+        case "lose":
+          divFrom = div_looserPage;
+          break;
+        case "play":
+          divFrom = div_game_login;
+          break;
+      }
       changePage(
-        div_game_login,
+        divFrom,
         div_settings_login,
         anchor_game,
         anchor_settings,
@@ -473,7 +497,19 @@ anchor_about.addEventListener("click", function () {
 
     case "game-login":
       console.log("in about!");
-      changePage(div_game_login, div_about, anchor_game, anchor_about, "about");
+      let divFrom;
+      switch (gameStatus) {
+        case "win":
+          divFrom = div_winnerPage;
+          break;
+        case "lose":
+          divFrom = div_looserPage;
+          break;
+        case "play":
+          divFrom = div_game_login;
+          break;
+      }
+      changePage(divFrom, div_about, anchor_game, anchor_about, "about");
       break;
 
     case "about":
@@ -1067,7 +1103,9 @@ function showGameSettings() {
 
 function Start() {
   gameStatus = "play";
-
+  // reset if "play again" //
+  specialMonster.wasEaten = false; 
+  numOfBalls = numOfBalls_5 + numOfBalls_15 + numOfBalls_25;
   backgroundMusic.play();
   score = 0;
   lives = 5;
