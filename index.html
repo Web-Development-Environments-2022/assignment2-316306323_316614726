@@ -331,7 +331,25 @@
         </table>
       </div>
 
-      <div class="hide" id="about_div"></div>
+      <dialog id="aboutDialog">
+        <button
+          id="close"
+          onclick="CloseDialog()"
+          style="height: 40px; width: 25px; margin-right: 90%"
+        >
+          X
+        </button>
+        <br />
+        <p textalign="center">
+          <b>This website belongs to Ori Salomon and Dor Levi</b>
+          <br />
+          We used jQuery to validate the register form inputs.
+          <br />
+          We had difficulty transferring variables and data between the
+          Javascript and the HTML pages <br />
+          and also design all the components as we want to.
+        </p>
+      </dialog>
 
       <div id="game_div_before_login" class="hide">
         <h2>Please Login first!</h2>

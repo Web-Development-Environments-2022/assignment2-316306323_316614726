@@ -454,80 +454,82 @@ anchor_game.addEventListener("click", function () {
 });
 
 anchor_about.addEventListener("click", function () {
-  switch (currPage) {
-    case "welcome-login":
-      console.log("in about!");
-      changePage(
-        div_welcome_login,
-        div_about,
-        anchor_welcome,
-        anchor_about,
-        "about"
-      );
-      break;
-    case "welcome":
-      console.log("in about!");
-      changePage(div_welcome, div_about, anchor_welcome, anchor_about, "about");
-      break;
-    case "settings":
-      console.log("in about!");
-      changePage(
-        div_settings,
-        div_about,
-        anchor_settings,
-        anchor_about,
-        "about"
-      );
-      break;
+  ShowDialog();
+  // switch (currPage) {
+  //   case "welcome-login":
+  //     console.log("in about!");
+  //     changePage(
+  //       div_welcome_login,
+  //       div_about,
+  //       anchor_welcome,
+  //       anchor_about,
+  //       "about"
+  //     );
+  //     ShowDialog();
+  //     break;
+  //   case "welcome":
+  //     console.log("in about!");
+  //     changePage(div_welcome, div_about, anchor_welcome, anchor_about, "about");
+  //     break;
+  //   case "settings":
+  //     console.log("in about!");
+  //     changePage(
+  //       div_settings,
+  //       div_about,
+  //       anchor_settings,
+  //       anchor_about,
+  //       "about"
+  //     );
+  //     break;
 
-    case "settings-login":
-      console.log("in about!");
-      changePage(
-        div_settings_login,
-        div_about,
-        anchor_settings,
-        anchor_about,
-        "about"
-      );
-      break;
-    case "game":
-      console.log("in about!");
-      changePage(div_game, div_about, anchor_game, anchor_about, "about");
-      break;
+  //   case "settings-login":
+  //     console.log("in about!");
+  //     changePage(
+  //       div_settings_login,
+  //       div_about,
+  //       anchor_settings,
+  //       anchor_about,
+  //       "about"
+  //     );
+  //     break;
+  //   case "game":
+  //     console.log("in about!");
+  //     changePage(div_game, div_about, anchor_game, anchor_about, "about");
+  //     break;
 
-    case "game-login":
-      console.log("in about!");
-      let divFrom;
-      switch (gameStatus) {
-        case "win":
-          divFrom = div_winnerPage;
-          break;
-        case "lose":
-          divFrom = div_looserPage;
-          break;
-        case "play":
-          divFrom = div_game_login;
-          break;
-      }
-      changePage(divFrom, div_about, anchor_game, anchor_about, "about");
-      break;
+  //   case "game-login":
+  //     console.log("in about!");
+  //     let divFrom;
+  //     switch (gameStatus) {
+  //       case "win":
+  //         divFrom = div_winnerPage;
+  //         break;
+  //       case "lose":
+  //         divFrom = div_looserPage;
+  //         break;
+  //       case "play":
+  //         divFrom = div_game_login;
+  //         break;
+  //     }
+  //     changePage(divFrom, div_about, anchor_game, anchor_about, "about");
+  //     break;
 
-    case "about":
-      console.log("still in about!");
-      break;
-    case "signUp":
-      console.log("in about!");
-      changePage(div_signUp, div_about, anchor_welcome, anchor_about, "about");
-      break;
-    case "login":
-      console.log("in about!");
-      changePage(div_login, div_about, anchor_welcome, anchor_about, "about");
-      break;
-    case "top10":
-      console.log("in about!");
-      changePage(div_top10, div_about, anchor_top10, anchor_about, "about");
-      break;
-  }
+  //   case "about":
+  //     console.log("still in about!");
+  //     break;
+  //   case "signUp":
+  //     console.log("in about!");
+  //     changePage(div_signUp, div_about, anchor_welcome, anchor_about, "about");
+  //     break;
+  //   case "login":
+  //     console.log("in about!");
+  //     changePage(div_login, div_about, anchor_welcome, anchor_about, "about");
+  //     break;
+  //   case "top10":
+  //     console.log("in about!");
+  //     changePage(div_top10, div_about, anchor_top10, anchor_about, "about");
+  //     break;
+  // }
 });
 
 /* ////////////////////////////////  SIGN-UP ////////////////////////////////// */
@@ -1019,8 +1021,8 @@ for (let i = 0; i < monsterImgs.length; i++) {
 }
 
 var specialMonsterImg = [new Image(), new Image()];
-specialMonsterImg[0].src = "./resources/special-monster-left.jpg";
-specialMonsterImg[1].src = "./resources/special-monster-right.jpg";
+specialMonsterImg[0].src = "./resources/special-monster-left.png";
+specialMonsterImg[1].src = "./resources/special-monster-right.png";
 var specialMonster = new Object();
 specialMonster.i = boardSize / 2;
 specialMonster.j = boardSize / 2;
@@ -1036,7 +1038,7 @@ pacmanImgs[3].src = "./resources/PacManDown.png";
 pacman.direction = 0;
 
 var clockImg = new Image();
-clockImg.src = "./resources/clock.jpg";
+clockImg.src = "./resources/clock.png";
 var clock = new Object();
 clock.addTime = 30;
 clock.i = 0; // just to set fields first
@@ -1044,7 +1046,7 @@ clock.j = 0;
 clock.wasEaten = false;
 
 var extraLifeImg = new Image();
-extraLifeImg.src = "./resources/heart.jpg";
+extraLifeImg.src = "./resources/heart.png";
 var extraLife = new Object();
 extraLife.i = boardSize - 1;
 extraLife.j = boardSize - 1;
@@ -1768,4 +1770,11 @@ function setResults() {
     cell1.innerHTML = results[i].username;
     cell2.innerHTML = results[i].score;
   }
+}
+
+function CloseDialog() {
+  document.getElementById("aboutDialog").close();
+}
+function ShowDialog() {
+  document.getElementById("aboutDialog").showModal();
 }
