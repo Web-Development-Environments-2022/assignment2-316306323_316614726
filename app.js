@@ -919,7 +919,7 @@ $(document).ready(function () {
 
 var monsterImgs = [new Image(), new Image(), new Image(), new Image()];
 for (let i = 0; i < monsterImgs.length; i++) {
-  monsterImgs[i].src = "./resources/monster-left.png";
+  monsterImgs[i].src = "resources/monster-left.png";
 }
 
 var specialMonsterImg = [new Image(), new Image()];
@@ -933,14 +933,14 @@ specialMonster.wasEaten = false;
 specialMonster.direction = 0;
 
 var pacmanImgs = [new Image(), new Image(), new Image(), new Image()]; // 0-left, 1-up, 2-right, 3-down
-pacmanImgs[0].src = "./resources/PacManLeft.png";
-pacmanImgs[1].src = "./resources/PacManUp.png";
-pacmanImgs[2].src = "./resources/PacManRight.png";
-pacmanImgs[3].src = "./resources/PacManDown.png";
+pacmanImgs[0].src = "resources/PacManLeft.png";
+pacmanImgs[1].src = "resources/PacManUp.png";
+pacmanImgs[2].src = "resources/PacManRight.png";
+pacmanImgs[3].src = "resources/PacManDown.png";
 pacman.direction = 0;
 
 var clockImg = new Image();
-clockImg.src = "./resources/clock.png";
+clockImg.src = "resources/clock.png";
 var clock = new Object();
 clock.addTime = 30;
 clock.i = 0; // just to set fields first
@@ -948,14 +948,14 @@ clock.j = 0;
 clock.wasEaten = false;
 
 var extraLifeImg = new Image();
-extraLifeImg.src = "./resources/heart.png";
+extraLifeImg.src = "resources/heart.png";
 var extraLife = new Object();
 extraLife.i = boardSize - 1;
 extraLife.j = boardSize - 1;
 extraLife.wasEaten = false;
 
 var backgroundMusic = document.createElement("audio");
-backgroundMusic.src = "./resources/music.mp3";
+backgroundMusic.src = "resources/music.mp3";
 backgroundMusic.loop = true;
 
 function showGameSettings() {
@@ -1397,7 +1397,7 @@ function setMonsterMove(monI, monJ, difI, difJ, monsters, k) {
   if (Math.abs(difI) <= Math.abs(difJ)) {
     // move if Y axis
     if (difI > 0) {
-      monsterImgs[k].src = "./resources/monster-left.png";
+      monsterImgs[k].src = "resources/monster-left.png";
       // move up
       if (possMoves[0]) {
         monsters[k].i -= 1;
@@ -1411,7 +1411,7 @@ function setMonsterMove(monI, monJ, difI, difJ, monsters, k) {
         }
       }
     } else if (difI < 0) {
-      monsterImgs[k].src = "./resources/monster-right.png";
+      monsterImgs[k].src = "resources/monster-right.png";
       // move down
       if (possMoves[1]) {
         monsters[k].i += 1;
@@ -1484,7 +1484,7 @@ function setMonsterMove(monI, monJ, difI, difJ, monsters, k) {
     } else {
       if (difI > 0) {
         // move up
-        monsterImgs[k].src = "./resources/monster-left.png";
+        monsterImgs[k].src = "resources/monster-left.png";
         if (possMoves[0]) {
           monsters[k].i -= 1;
         } else {
@@ -1498,7 +1498,7 @@ function setMonsterMove(monI, monJ, difI, difJ, monsters, k) {
         }
       } else if (difI < 0) {
         // move down
-        monsterImgs[k].src = "./resources/monster-right.png";
+        monsterImgs[k].src = "resources/monster-right.png";
         if (possMoves[1]) {
           monsters[k].i += 1;
         } else {
