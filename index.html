@@ -52,7 +52,7 @@
           alt="Logo!"
           style="height: 150px"
         /><br />
-        <h1 id="logged_in_welcome" style="color:black"></h1>
+        <h1 id="logged_in_welcome" style="color: black"></h1>
         <button id="logout-btn" class="btn-welcome-in">
           <!--onclick="moveSignIn()" -->
           Logout
@@ -308,8 +308,7 @@
               <th>Score</th>
             </tr>
           </thead>
-          <tbody id="bodyTable" style="text-align: center">
-          </tbody>
+          <tbody id="bodyTable" style="text-align: center"></tbody>
           <tfoot style="text-align: center">
             <tr>
               <td>If you are not listed first play harder</td>
@@ -322,18 +321,22 @@
         <button
           id="close"
           onclick="CloseDialog()"
-          style="height: 40px; width: 25px; margin-right: 40%;"
+          style="height: 40px; width: 25px; margin-right: 40%"
         >
           X
         </button>
         <br />
         <p textalign="center">
-          Hello!!! We are Ori Salomon and Dor Levi, welcome to our website!<br>
-          We really enjoyed making this project.<br>
-          Although both of us have some previous experience with JS, it was not as simple as we thought.<br>
-          We think the main challenge is to make everything work together - JS, HTML and CSS, while maintaining simplisity.<br>
-          We used jquery syntax to catch elements and check/change their attributes. <br>
-          A simple example to our use of jquery is the sign-up page, where we used jquery (and regex) to validate the signUp form fields.<br>
+          Hello!!! We are Ori Salomon and Dor Levi, welcome to our website!<br />
+          We really enjoyed making this project.<br />
+          Although both of us have some previous experience with JS, it was not
+          as simple as we thought.<br />
+          We think the main challenge is to make everything work together - JS,
+          HTML and CSS, while maintaining simplisity.<br />
+          We used jquery syntax to catch elements and check/change their
+          attributes. <br />
+          A simple example to our use of jquery is the sign-up page, where we
+          used jquery (and regex) to validate the signUp form fields.<br />
           There was no use of any template.
         </p>
       </dialog>
@@ -488,7 +491,7 @@
       </div>
 
       <div id="gameWinner" class="hide">
-        <img src="./resources/winner.png">
+        <img style="width: 30%" src="./resources/winner.png" />
         <input
           type="button"
           value="Restart Game"
@@ -504,7 +507,7 @@
           onclick="saveResultAndRestartGame()"
           style="color: black"
         />
-        <img id="lose-game" src="./resources/looser.png"/>
+        <img id="lose-game" src="./resources/looser.png" />
         <p id="loseMsg"></p>
       </div>
 

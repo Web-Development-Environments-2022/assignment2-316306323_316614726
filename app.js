@@ -101,10 +101,9 @@ function changePage(
     have_anchor_to.classList.toggle("active");
   }
 
-  if(to_page === div_game_login){
+  if (to_page === div_game_login) {
     anchor_game.style.backgroundColor = "#33dbf5";
-  }
-  else{
+  } else {
     anchor_game.style.backgroundColor = "rgb(165, 162, 162)";
   }
   if (from_page === div_game_login) {
@@ -117,7 +116,6 @@ function changePage(
 anchor_welcome.addEventListener("click", function () {
   switch (currPage) {
     case "welcome":
-
       break;
     case "settings":
       changePage(
@@ -165,11 +163,10 @@ anchor_welcome.addEventListener("click", function () {
         anchor_welcome,
         "welcome-login"
       );
-      
+
       break;
 
     case "about":
-     
       changePage(
         div_about,
         currUser ? div_welcome_login : div_welcome,
@@ -179,17 +176,14 @@ anchor_welcome.addEventListener("click", function () {
       );
       break;
     case "signUp":
-    
       changePage(div_signUp, div_welcome, false, false, "welcome");
 
       break;
     case "login":
-    
       changePage(div_login, div_welcome, false, false, "welcome");
       break;
 
     case "top10":
-  
       changePage(
         div_top10,
         currUser ? div_welcome_login : div_welcome,
@@ -206,7 +200,6 @@ anchor_welcome.addEventListener("click", function () {
 anchor_settings.addEventListener("click", function () {
   switch (currPage) {
     case "welcome-login":
- 
       changePage(
         div_welcome_login,
         div_settings_login,
@@ -217,7 +210,6 @@ anchor_settings.addEventListener("click", function () {
       break;
 
     case "welcome":
-    
       changePage(
         div_welcome,
         div_settings,
@@ -227,7 +219,6 @@ anchor_settings.addEventListener("click", function () {
       );
       break;
     case "settings":
-   
       break;
     case "game":
       changePage(
@@ -262,7 +253,6 @@ anchor_settings.addEventListener("click", function () {
       break;
 
     case "about":
-   
       changePage(
         div_about,
         currUser ? div_settings_login : div_settings,
@@ -272,7 +262,6 @@ anchor_settings.addEventListener("click", function () {
       );
       break;
     case "signUp":
-     
       changePage(
         div_signUp,
         div_settings,
@@ -282,7 +271,6 @@ anchor_settings.addEventListener("click", function () {
       );
       break;
     case "login":
-   
       changePage(
         div_login,
         div_settings,
@@ -292,7 +280,6 @@ anchor_settings.addEventListener("click", function () {
       );
       break;
     case "top10":
-      
       changePage(
         div_top10,
         currUser ? div_settings_login : div_settings,
@@ -306,7 +293,6 @@ anchor_settings.addEventListener("click", function () {
 anchor_top10.addEventListener("click", function () {
   switch (currPage) {
     case "welcome-login":
-  
       setResults();
       changePage(
         div_welcome_login,
@@ -317,12 +303,10 @@ anchor_top10.addEventListener("click", function () {
       );
       break;
     case "welcome":
-
       setResults();
       changePage(div_welcome, div_top10, anchor_welcome, anchor_top10, "top10");
       break;
     case "settings":
- 
       setResults();
       changePage(
         div_settings,
@@ -334,7 +318,6 @@ anchor_top10.addEventListener("click", function () {
       break;
 
     case "settings-login":
- 
       setResults();
       changePage(
         div_settings_login,
@@ -368,22 +351,18 @@ anchor_top10.addEventListener("click", function () {
       break;
 
     case "about":
-    
       setResults();
       changePage(div_about, div_top10, anchor_about, anchor_top10, "top10");
       break;
     case "signUp":
- 
       setResults();
       changePage(div_signUp, div_top10, anchor_welcome, anchor_top10, "top10");
       break;
     case "login":
- 
       setResults();
       changePage(div_login, div_top10, anchor_welcome, anchor_top10, "top10");
       break;
     case "top10":
-
       break;
   }
 });
@@ -392,7 +371,6 @@ anchor_game.addEventListener("click", function () {
   // if we were at game-login?
   switch (currPage) {
     case "welcome-login":
-  
       changePage(
         div_welcome_login,
         div_game_login,
@@ -436,11 +414,9 @@ anchor_game.addEventListener("click", function () {
       changePage(div_signUp, div_game, anchor_welcome, anchor_game, "game");
       break;
     case "login":
- 
       changePage(div_login, div_game, anchor_welcome, anchor_game, "game");
       break;
     case "top10":
-
       changePage(
         div_top10,
         currUser ? div_game_login : div_game,
@@ -459,7 +435,6 @@ anchor_about.addEventListener("click", function () {
 
 /* ////////////////////////////////  SIGN-UP ////////////////////////////////// */
 btn_signUp.addEventListener("click", function () {
-
   div_welcome.classList.toggle("hide");
   div_signUp.classList.toggle("hide");
   currPage = "signUp";
@@ -482,10 +457,7 @@ $(document).ready(function () {
       $("#usernamecheck").show();
       usernameError = false;
       return false;
-    } else if (
-      usernameValue.length == 0 ||
-      !/[a-zA-Z]+/.test(usernameValue)
-    ) {
+    } else if (usernameValue.length == 0 || !/[a-zA-Z]+/.test(usernameValue)) {
       $("#usernamecheck").show();
       $("#usernamecheck").html(
         "**username must be not empty and must include some characters!"
@@ -496,7 +468,7 @@ $(document).ready(function () {
       $("#usernamecheck").hide();
     }
   }
-  
+
   // Validate Email
 
   var emailError = false;
@@ -569,14 +541,14 @@ $(document).ready(function () {
 
   // Validate Full name
   $("#namecheck").hide();
-  let nameError = true;
+  var nameError = true;
   $("#form_name").keyup(function () {
     nameError = true;
     validateName();
   });
 
   function validateName() {
-    let nameError = true;
+    nameError = true;
     nameValue = $("#form_name").val();
     if (nameValue.length == "") {
       $("#namecheck").show();
@@ -1037,6 +1009,8 @@ function Start() {
   gameStatus = "play";
   // reset if "play again" //
   specialMonster.wasEaten = false;
+  clock.wasEaten = false;
+  extraLife.wasEaten = false;
   numOfBalls = numOfBalls_5 + numOfBalls_15 + numOfBalls_25;
   backgroundMusic.play();
   score = 0;
@@ -1709,9 +1683,8 @@ function ShowDialog() {
   document.getElementById("aboutDialog").showModal();
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target.id == "aboutDialog" && event.target.id != "about_a") {
     CloseDialog();
   }
-}
-
+};
