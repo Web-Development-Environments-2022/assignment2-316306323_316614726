@@ -1,3 +1,9 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7770635&assignment_repo_type=AssignmentRepo)
-# Assignment2
- 
+# READ ME
+## SITE URL:
+## Submitters:
+- Ori Salomon: 316306323
+- Dor Levi: 316614726
+## Functionality
+- Clock: we added a clock object that appears in different locations in the game grid. When you eat the clock, you get extra 30 seconds to play!
+- Extra Life: we added an extra life object that appears in different locations in the game grid.
+- BONUS: We added top 10 game results.
